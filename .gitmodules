@@ -1,0 +1,3 @@
+[submodule "PEAQ"]
+	path = PEAQ
+	url = https://github.com/NikolajAndersson/PEAQ.git
