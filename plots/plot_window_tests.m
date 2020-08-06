@@ -1,14 +1,17 @@
 load('pghi_gla_ljspeech.mat')
-
-%Prep
-
 sr = 22050;
 tfrs = (M.^2./(L.*red)')';
 tfrs = tfrs*L/sr;
-means = mean(to_save_pghi, 1);
 
+plotStats(1, mean(to_save_pghi, 1), M, tfrs, 'Perceptual quality of phaseless reconstruction', 'PEAQ PGHI', [-4,0.5])
+plotStats(2, mean(SNR_pghi, 1), M, tfrs, 'Objective quality of phaseless reconstruction', 'SC PGHI', [-60,6])
+plotStats(3, mean(to_save_gla, 1), M, tfrs, 'Perceptual quality of phaseless reconstruction', 'PEAQ FGLA', [-4,0.5])
+plotStats(4, mean(SNR_gla, 1), M, tfrs, 'Objective quality of phaseless reconstruction', 'SC FGLA', [-60,6])
 
-figure(2);
+function plotStats(index, means, M, tfrs, titlestr, ylabelstr, ylimrange)
+sr = 22050;
+
+figure(index);
 
 %First
 ax1 = subplot(121);
@@ -26,12 +29,12 @@ semilogx(512, means(1, find(M==512), 3), '+','LineWidth',3, 'Color','black','Mar
 semilogx(1024, means(1, find(M==1024), 1), '+','LineWidth',3, 'Color','black','MarkerSize',20)
 
 xlabel('M','FontSize',24)
-ylabel('PEAQ PGHI','FontSize',24)
+ylabel(ylabelstr,'FontSize',24)
 
 %legend({'red = 32','red = 16', 'red = 8', 'red = 4', 'red = 2'},'Location','southeast','FontSize',24)
 set(gca,'Fontsize',24);
 
-axis([3e1,5e4,-4,0.5])
+ylim(ylimrange)
 
 ax1_pos = get(ax1,'Position');
 
@@ -56,10 +59,11 @@ set(gca, 'XTick', [1e-2,1,1e2,1e4])
 set(gca,'YTickLabel',[]);
 legend({'red = 32','red = 16', 'red = 8', 'red = 4', 'red = 2'},'Location','southeast','FontSize',24)
 set(gca,'Fontsize',24);
-axis([1e-3,5e4,-4,0.5])
+ylim(ylimrange)
 
 hold off
 
 subplot(121);
-sgtitle('Perceptual quality of phaseless reconstruction','FontSize',24);
+sgtitle(titlestr,'FontSize',24);
 
+end
