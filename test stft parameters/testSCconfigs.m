@@ -44,7 +44,7 @@ win3_SNR = gabwin(win3_SNR,a3_SNR,M3_SNR,L);
 
 %% Prepare arrays for results
 
-examples = 2;
+examples = 16;
 SNR1 = zeros(examples, length(M), length(red));
 SNR2 = zeros(examples, length(M), length(red));
 SNR3 = zeros(examples, length(M), length(red));
@@ -81,7 +81,7 @@ for k = 1:length(soundfiles)
             c_phase = angle(c_ori);
 
             % Amplitude (random phase)
-            c_amp_rec = c_amp .* exp(1i*(c_phase + normrnd(0, 1, size(c_amp))));
+            c_amp_rec = c_amp .* exp(1i*(c_phase + normrnd(0, 0.1, size(c_amp))));
 
             %c_amp_pgla = gla(c_amp_pghi,dual,a,M,flag,'fgla','input');
 
