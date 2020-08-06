@@ -1,3 +1,9 @@
 [submodule "PEAQ"]
 	path = PEAQ
 	url = https://github.com/NikolajAndersson/PEAQ.git
+[submodule "ltfat"]
+	path = ltfat
+	url = https://github.com/ltfat/ltfat
+[submodule "phaseret"]
+	path = phaseret
+	url = https://github.com/ltfat/phaseret
