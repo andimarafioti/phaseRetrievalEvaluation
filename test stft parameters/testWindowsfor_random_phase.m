@@ -27,11 +27,6 @@ red = [32, 16, 8, 4, 2];
 %M=[512, 1024, 2048];
 flag = 'timeinv';
 
-M_SNR = 2048;
-a_SNR = 128;
-win_SNR = {'gauss',a_SNR*M_SNR/L};
-win_SNR = gabwin(win_SNR,a_SNR,M_SNR,L);
-
 %% Prepare arrays for results
 
 examples = 2;
