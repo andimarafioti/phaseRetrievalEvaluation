@@ -1,7 +1,7 @@
 clear all
 
-%ltfatstart(); % start the ltfat toolbox
-%phaseretstart;
+ltfatstart(); % start the ltfat toolbox
+phaseretstart;
 
 %%
 % base_folder = '\\kfsnas08\Denklast\amarafioti\Documents\Datasets\Lakh\new-simple-piano\';
@@ -29,7 +29,7 @@ flag = 'timeinv';
 
 %% Prepare arrays for results
 
-examples = 2;
+examples = 16;
 to_save = zeros(examples, length(M), length(red));
 SNR = zeros(examples, length(M), length(red));
 
@@ -70,7 +70,7 @@ for k = 1:length(soundfiles)
             c_phase = angle(c_ori);
 
             % Amplitude (random phase)
-            c_amp_rec = c_amp .* exp(1i*(c_phase + normrnd(0, 1, size(c_amp))));
+            c_amp_rec = c_amp .* exp(1i*(c_phase + normrnd(0, 0.1, size(c_amp))));
 
             %c_amp_pgla = gla(c_amp_pghi,dual,a,M,flag,'fgla','input');
 
@@ -95,63 +95,11 @@ for k = 1:length(soundfiles)
 end
 toc
 
-del_indexes = [];
-for index = 1:length(to_save)
-    if length(find(isnan(to_save(index, :,  :)))) > 0
-        del_indexes(length(del_indexes) + 1) = index;
-    end
-end
-to_save(del_indexes, :, :) = [];
-
-
-del_indexes_SNR = [];
-for index = 1:length(SNR)
-    if length(find(isnan(SNR(index, :,  :)))) > 0
-        del_indexes_SNR(length(del_indexes_SNR) + 1) = index;
-    end
-end
-SNR(del_indexes_SNR, :, :) = [];
-
-
-
-[red_S,M_S] = meshgrid(red, M);
-
-figure(1)
-hold on
-surf(M_S, red_S, squeeze(mean(to_save, 1)))
-xlabel('M')
-ylabel('red')
-zlabel('PEAQ')
-
-figure(2)
 
 tfrs = (M.^2./(L.*red)')';
 
-means = mean(to_save, 1);
-semilogx(tfrs(:, 1), means(1, :, 1), tfrs(:, 2), means(1, :, 2), tfrs(:, 3), means(1, :, 3), tfrs(:, 4), means(1, :, 4), tfrs(:, 5), means(1, :, 5),'LineWidth',5)
-hold on
-semilogx(M(find(M==512))^2/(L*4), means(1, find(M==512), 4), '*','LineWidth',10, 'Color','black')
-text(M(find(M==512))^2/(L*4)+0.3, means(1, find(M==512), 4)+0.04, '\leftarrow M = 512','FontSize',24)
-
-semilogx(M(find(M==1024))^2/(L*16), means(1, find(M==1024), 2), '*','LineWidth',10, 'Color','black')
-text(M(find(M==1024))^2/(L*16)+0.25, means(1, find(M==1024), 2)+0.04, '\leftarrow M = 1024','FontSize',24)
-
-xlabel('tfr','FontSize',24)
-ylabel('PEAQ','FontSize',24)
-legend({'red = 32','red = 16', 'red = 8', 'red = 4', 'red = 2'},'Location','southwest','FontSize',24)
-set(gca,'Fontsize',24);
-figure(3)
-semilogx(M_S(:, 1), means(1, :, 1), M_S(:, 2), means(1, :, 2), M_S(:, 3), means(1, :, 3), M_S(:, 4), means(1, :, 4), M_S(:, 5), means(1, :, 5),'LineWidth',5)
-xlabel('M')
-ylabel('PEAQ')
-legend({'red = 32','red = 16', 'red = 8', 'red = 4', 'red = 2'},'Location','southwest')
-
-figure(4)
-stds = std(to_save, 1);
-semilogx(tfrs(:, 1), stds(1, :, 1), tfrs(:, 2), stds(1, :, 2), tfrs(:, 3), stds(1, :, 3), tfrs(:, 4), stds(1, :, 4), tfrs(:, 5), stds(1, :, 5),'LineWidth',5)
-xlabel('tfr')
-ylabel('PEAQ')
-legend({'red = 32','red = 16', 'red = 8', 'red = 4', 'red = 2'},'Location','southwest')
+plotStats(1, mean(SNR, 1), M, tfrs, 'Objective quality of phaseless reconstruction', 'SC', [-60,6])
+plotStats(1, mean(to_save, 1), M, tfrs, 'Subjective quality of phaseless reconstruction', 'PEAQ', [-4,0.5])
 
 
 function d=propdiv(n)
