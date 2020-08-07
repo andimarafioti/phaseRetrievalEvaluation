@@ -21,6 +21,7 @@ semilogx(1024, means(1, find(M==1024), 1), '+','LineWidth',3, 'Color','black','M
 
 xlabel('M','FontSize',24)
 ylabel(ylabelstr,'FontSize',24)
+set(gca, 'XTick', [1e2, 1e3, 1e4, 1e5])
 
 %legend({'red = 32','red = 16', 'red = 8', 'red = 4', 'red = 2'},'Location','southeast','FontSize',24)
 set(gca,'Fontsize',24);
