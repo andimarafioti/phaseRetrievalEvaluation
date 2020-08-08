@@ -29,7 +29,7 @@ flag = 'timeinv';
 
 %% Prepare arrays for results
 
-examples = 16;
+examples = 64;
 to_save = zeros(examples, length(M), length(red));
 SNR = zeros(examples, length(M), length(red));
 
@@ -99,7 +99,7 @@ toc
 tfrs = (M.^2./(L.*red)')';
 
 plotStats(1, mean(SNR, 1), M, tfrs, 'Objective quality of phaseless reconstruction', 'SC', [-60,6])
-plotStats(1, mean(to_save, 1), M, tfrs, 'Subjective quality of phaseless reconstruction', 'PEAQ', [-4,0.5])
+plotStats(2, mean(to_save, 1), M, tfrs, 'Subjective quality of phaseless reconstruction', 'PEAQ', [-4,0.5])
 
 
 function d=propdiv(n)
