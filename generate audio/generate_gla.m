@@ -99,7 +99,7 @@ end
 toc
 
 tfrs = (M.^2./(L.*red)')';
-
+save('generate audio/fgla/quality.mat', 'to_save_gla', 'SNR_gla', 'M', 'red', 'L')
 plotStats(1, mean(to_save_gla, 1), M, tfrs, 'Perceptual quality of phaseless reconstruction', 'PEAQ FGLA', [-4,0.5])
 plotStats(2, mean(SNR_gla, 1), M, tfrs, 'Objective quality of phaseless reconstruction', 'SC FGLA', [-60,6])
 
