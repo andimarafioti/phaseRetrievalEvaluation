@@ -8,7 +8,7 @@ clear all
 % soundfiles = dir(base_folder);
 % soundfiles = soundfiles(4:end);
 
-base_folder = '\\kfsnas08\Denklast\amarafioti\Documents\Datasets\LJSpeech-1.1\wavs\';
+base_folder = '\\kfsnas08.kfs.oeaw.ac.at\Denklast\amarafioti\Documents\Datasets\LJSpeech-1.1\wavs\';
 soundfiles = dir(base_folder);
 soundfiles = soundfiles(3:end);
 
