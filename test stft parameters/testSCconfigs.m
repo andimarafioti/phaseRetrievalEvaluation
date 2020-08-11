@@ -1,7 +1,7 @@
 clear all
 
-%ltfatstart(); % start the ltfat toolbox
-%phaseretstart;
+ltfatstart(); % start the ltfat toolbox
+phaseretstart;
 
 %%
 % base_folder = '\\kfsnas08\Denklast\amarafioti\Documents\Datasets\Lakh\new-simple-piano\';
@@ -15,7 +15,7 @@ soundfiles = soundfiles(3:end);
 
 %% STFT parameters 
 
-L = 2^13 * 3 * 5;
+L = 2^11 * 3 * 5;
 
 d = 32* propdiv(L/32);
 
@@ -32,13 +32,13 @@ a1_SNR = 128;
 win1_SNR = {'gauss',a1_SNR*M1_SNR/L};
 win1_SNR = gabwin(win1_SNR,a1_SNR,M1_SNR,L);
 
-M2_SNR = 1024;
-a2_SNR = 64;
+M2_SNR = 512;
+a2_SNR = 128;
 win2_SNR = {'gauss',a2_SNR*M2_SNR/L};
 win2_SNR = gabwin(win2_SNR,a2_SNR,M2_SNR,L);
 
-M3_SNR = 512;
-a3_SNR = 32;
+M3_SNR = 128;
+a3_SNR = 8;
 win3_SNR = {'gauss',a3_SNR*M3_SNR/L};
 win3_SNR = gabwin(win3_SNR,a3_SNR,M3_SNR,L);
 
@@ -80,11 +80,8 @@ for k = 1:length(soundfiles)
             c_amp = abs(c_ori); % Initialize magnitude
             c_phase = angle(c_ori);
 
-            % Amplitude (random phase)
-            c_amp_rec = c_amp .* exp(1i*(c_phase + normrnd(0, 0.1, size(c_amp))));
-
-            %c_amp_pgla = gla(c_amp_pghi,dual,a,M,flag,'fgla','input');
-
+            % Amplitude (pghi)
+            c_amp_rec = pghi(c_amp,gamma,a0,M0,flag, 'tol', 1e-7);
             f_amp_rec = idgtreal(c_amp_rec,dual,a0,M0,flag);
             
             re_c_amp_rec = abs(dgtreal(f_amp_rec,win1_SNR,a1_SNR,M1_SNR,L,flag));
@@ -111,7 +108,7 @@ tfrs = (M.^2./(L.*red)')';
 
 plotStats(1, mean(SNR1, 1), M, tfrs, 'Objective quality of phaseless reconstruction', 'SC random 2048-128', [-60,6])
 plotStats(2, mean(SNR2, 1), M, tfrs, 'Objective quality of phaseless reconstruction', 'SC random 1024-64', [-60,6])
-plotStats(3, mean(SNR3, 1), M, tfrs, 'Objective quality of phaseless reconstruction', 'SC random 512-32', [-60,6])
+plotStats(3, mean(SNR3, 1), M, tfrs, 'Objective quality of phaseless reconstruction', 'SC random 128-8', [-60,6])
 
 
 
