@@ -7,7 +7,7 @@ figure(index);
 %First
 hold on
 for i=1:size(means,3)
-    plot(1:10, means(1, :, i),'LineWidth',4)
+    plot(1:size(means, 2), means(1, :, i),'LineWidth',4)
 end
 
 xlabel('iterations * 10','FontSize',24)

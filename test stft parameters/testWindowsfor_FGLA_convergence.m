@@ -19,7 +19,7 @@ L = 2^13 * 3 * 5;
 
 tfr = 0.6;
 
-red = [32, 16, 8, 4, 2];
+red = [4, 2];
 
 d = 32* propdiv(L/32);
 M = d(find(d>=64 & d<L/2));
@@ -34,8 +34,8 @@ win_SNR = gabwin(win_SNR,a_SNR,M_SNR,L);
 
 steps_iteration = 10;
 num_iterations = 100;
-ODG_gla = zeros(1, steps_iteration, length(red));
-SC_gla = zeros(1, steps_iteration, length(red));
+ODG_gla = zeros(1, num_iterations/steps_iteration + 1, length(red));
+SC_gla = zeros(1, num_iterations/steps_iteration + 1 , length(red));
 
 %% Reconstruct signals
 
@@ -65,15 +65,14 @@ for k = 1:length(soundfiles)
 
         c_ori = dgtreal(signal,win,a0,M0,L,flag); % DGT of original
         c_amp = abs(c_ori); % Initialize magnitude
-        c_rec_gla = c_amp;
+        c_start = c_amp;
         signal_resampled = resample(signal(M0:end-M0), 48000, fs);
+        % FGLA
+        [c_rec_gla, f_rec_gla] = modGla(c_amp,win,a0,M0, 'print', 'fgla');
 
         for iteration = 1: num_iterations/steps_iteration
-            % FGLA
-            [c_rec_gla,f_rec_gla] = gla(c_rec_gla,win,a0,M0, steps_iteration, 'fgla');
-
             % Measure PEAQ
-            gla_resampled = resample(f_rec_gla(M0:end-M0), 48000, fs);
+            gla_resampled = resample(f_rec_gla(iteration, M0:end-M0), 48000, fs);
 
             audiowrite('or.wav', signal_resampled, 48000);
             audiowrite('gla.wav', gla_resampled, 48000);
@@ -84,10 +83,30 @@ for k = 1:length(soundfiles)
             % Measure spectral divergence
 
             re_c_amp = abs(dgtreal(signal,win_SNR,a_SNR,M_SNR,L,flag));
-            re_c_amp_gla= abs(dgtreal(f_rec_gla,win_SNR,a_SNR,M_SNR,L,flag));
+            re_c_amp_gla= abs(dgtreal(f_rec_gla(iteration, :),win_SNR,a_SNR,M_SNR,L,flag));
 
             SC_gla(size(SC_gla, 1), iteration, red0==red) = magnitudeerrdb(re_c_amp_gla, re_c_amp);
         end
+        
+            [c_rec_gla,f_rec_gla] = gla(c_amp,win,a0,M0, 100, 'print', 'fgla');
+
+            % Measure PEAQ
+            gla_resampled = resample(f_rec_gla(M0:end-M0), 48000, fs);
+
+            audiowrite('or.wav', signal_resampled, 48000);
+            audiowrite('gla.wav', gla_resampled, 48000);
+
+            [odg, movb] = PQevalAudio_fn('or.wav', 'gla.wav');
+            ODG_gla(size(ODG_gla, 1), iteration+1, red0==red) = odg;
+
+            % Measure spectral divergence
+
+            re_c_amp = abs(dgtreal(signal,win_SNR,a_SNR,M_SNR,L,flag));
+            re_c_amp_gla= abs(dgtreal(f_rec_gla,win_SNR,a_SNR,M_SNR,L,flag));
+
+            SC_gla(size(SC_gla, 1), iteration+1, red0==red) = magnitudeerrdb(re_c_amp_gla, re_c_amp);
+
+        
 
     end
 end
