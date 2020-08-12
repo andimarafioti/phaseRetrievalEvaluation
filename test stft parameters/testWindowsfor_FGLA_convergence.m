@@ -92,8 +92,8 @@ for k = 1:length(soundfiles)
 end
 toc
 
-plotConvergence(1, mean(ODG_gla(2:end, :, :), 1), red, 'Perceptual quality of phaseless reconstruction', 'PEAQ FGLA', [-4,0.5])
-plotConvergence(2, mean(SC_gla(2:end, :, :), 1), red, 'Objective quality of phaseless reconstruction', 'SC FGLA', [-60,6])
+plotConvergence(1, mean(ODG_gla(2:end, :, :), 1), red, 'Perceptual convergence of FGLA', 'PEAQ', [-3,0.5])
+plotConvergence(2, mean(SC_gla(2:end, :, :), 1), red, 'Objective convergence of FGLA', 'SC', [-30,-5])
 
 function d=propdiv(n)
 % PROPDIV   - Proper divisors of integer
