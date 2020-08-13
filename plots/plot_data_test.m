@@ -24,8 +24,8 @@ means_ODG_rock = mean(ODG_rock, 1);
 
 means_ODG = [means_ODG_midi;means_ODG_speech;means_ODG_electronic;means_ODG_rock];
 
-for index = 1:length(red)
-    plotDiffData(index+5, means_ODG(:, :, index), M, tfrs(:, index), strcat('Subjective PGHI performance at redundancy  ', num2str(red(index))), 'PEAQ PGHI', [-4, 0])
+for index = 1:2:length(red)
+    plotDiffData(3, means_ODG(:, :, index), M, tfrs(:, index), 'Data dependency at different redundancies', 'PEAQ PGHI', [-4, 0])
 end
 
 
