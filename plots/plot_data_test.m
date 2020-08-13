@@ -13,8 +13,8 @@ means_SC_rock = mean(SC_rock, 1);
 
 means_SC = [means_SC_midi;means_SC_speech;means_SC_electronic;means_SC_rock];
 
-for index = 1:length(red)
-    plotDiffData(index, means_SC(:, :, index), M, tfrs(:, index), strcat('Objetive PGHI performance at redundancy  ', num2str(red(index))), 'SC PGHI', [-60, 0])
+for index = 1:2:length(red)
+    plotDiffData(1, means_SC(:, :, index), M, tfrs(:, index), 'Data dependency at different redundancies', 'SC PGHI', [-60, 0])
 end
 
 means_ODG_midi = mean(ODG_midi, 1);
