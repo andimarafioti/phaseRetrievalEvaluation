@@ -2,7 +2,8 @@ function plotDiffData(index, means, marker, M, tfrs, titlestr, ylabelstr, ylimra
 sr = 22050;
 colors = [[0, 0.4470, 0.7410]; [0.8500, 0.3250, 0.0980]; [0.9290, 0.6940, 0.1250]; [0.4940, 0.1840, 0.5560]];
 
-figure(index);
+f = figure(index);
+set(f, 'Position', [10 10 900 1200])
 
 hold on
 set(gca, 'XScale', 'log');
@@ -12,7 +13,7 @@ for i=1:size(means,1)
 end
 
 ylim(ylimrange)
-xlabel('a*M/sr','FontSize',24)
+xlabel('\lambda','FontSize',24)
 ylabel(ylabelstr,'FontSize',24)
 set(gca, 'XTick', [1e-2,1,1e2,1e4])
 legend({'midi','speech', 'electronic', 'rock'},'Location','southeast','FontSize',24)
