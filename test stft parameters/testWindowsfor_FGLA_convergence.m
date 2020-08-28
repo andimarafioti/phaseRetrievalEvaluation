@@ -36,6 +36,7 @@ steps_iteration = 10;
 num_iterations = 100;
 ODG_gla = zeros(1, num_iterations/steps_iteration, length(red));
 SC_gla = zeros(1, num_iterations/steps_iteration, length(red));
+time_gla = zeros(1, length(red));
 
 %% Reconstruct signals
 
@@ -51,6 +52,7 @@ for k = 1:length(soundfiles)
     signal = signal(1:L);
     SC_gla(size(SC_gla, 1)+1, :, :) = 0;
     ODG_gla(size(ODG_gla, 1)+1, :, :) = 0;
+    time_gla(size(time_gla, 1)+1, :, :) = 0;
 
     for red0 = red
         M0 = sqrt(tfr*L*red0);
@@ -68,7 +70,9 @@ for k = 1:length(soundfiles)
         c_start = c_amp;
         signal_resampled = resample(signal(M0:end-M0), 48000, fs);
         % FGLA
+        tic
         [c_rec_gla, f_rec_gla] = modGla(c_amp,win,a0,M0, 'print', 'fgla');
+        time_gla(size(time_gla, 1), red0==red) = toc;
 
         for iteration = 1: num_iterations/steps_iteration
             % Measure PEAQ
