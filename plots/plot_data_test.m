@@ -14,8 +14,10 @@ means_SC_rock = mean(SC_rock, 1);
 
 means_SC = [means_SC_midi;means_SC_speech;means_SC_electronic;means_SC_rock];
 
+faceColor = [0 0.2 0.2];
 for index = 1:2:length(red)
-    plotDiffData(1, means_SC(:, :, index), strcat('-',Markers{(index+1)/2}), M, tfrs(:, index), 'Data dependency at different redundancies', 'SC PGHI', [-60, 0])
+    index = length(red)-index+1;
+    plotDiffData(1, means_SC(:, :, index), M, tfrs(:, index), 'Data dependency at different redundancies', 'SC PGHI', [-60, 0], faceColor*((index+1)/2))
 end
 
 means_ODG_midi = mean(ODG_midi, 1);
@@ -26,7 +28,8 @@ means_ODG_rock = mean(ODG_rock, 1);
 means_ODG = [means_ODG_midi;means_ODG_speech;means_ODG_electronic;means_ODG_rock];
 
 for index = 1:2:length(red)
-    plotDiffData(3, means_ODG(:, :, index), strcat('-',Markers{(index+1)/2}), M, tfrs(:, index), 'Data dependency at different redundancies', 'PEAQ PGHI', [-4, 0.5])
+    index = length(red)-index+1;
+    plotDiffData(3, means_ODG(:, :, index), M, tfrs(:, index), 'Data dependency at different redundancies', 'PEAQ PGHI', [-4, 0.5], faceColor*((index+1)/2))
 end
 
 
