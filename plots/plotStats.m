@@ -52,7 +52,7 @@ if size(means, 3) > 4
 end
 
 
-xlabel('a*M/sr','FontSize',24)
+xlabel('\lambda','FontSize',24)
 %ylabel('PEAQ','FontSize',24)
 set(gca, 'XTick', [1e-2,1,1e2,1e4])
 set(gca,'YTickLabel',[]);
