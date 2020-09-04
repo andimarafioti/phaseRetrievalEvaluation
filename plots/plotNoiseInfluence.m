@@ -1,24 +1,25 @@
-function plotNoiseInfluence(index, means, color, M, tfrs, titlestr, ylabelstr, ylimrange)
+function plotNoiseInfluence(index, means, M, tfrs, titlestr, ylabelstr, ylimrange, marker)
 sr = 22050;
-Markers = {'d','+','s','>','<','^', 'o','*','x','v',};
+colors = [[0, 0.4470, 0.7410]; [0.8500, 0.3250, 0.0980]; [0.9290, 0.6940, 0.1250]; [0.4940, 0.1840, 0.5560]; [0.4660, 0.6740, 0.1880]];
 
-figure(index);
+f = figure(index);
+set(f, 'Position', [0 0 750 1000])
 
 hold on
 set(gca, 'XScale', 'log');
 
-for i=1:size(means,1)
-    semilogx(tfrs(:), means(i, :), strcat('-',Markers{i}),'MarkerSize',12, 'LineWidth',4, 'Color', color)
+for i=1:size(means,2)
+    semilogx(tfrs(:, i), means(:, i), strcat('-',marker),'MarkerSize',12, 'LineWidth',4, 'Color', colors(i, :))
 end
 
 ylim(ylimrange)
-xlabel('a*M/sr','FontSize',24)
+xlabel('\lambda','FontSize',24)
 ylabel(ylabelstr,'FontSize',24)
 set(gca, 'XTick', [1e-2,1,1e2,1e4])
-legend({'\sigma = 01','\sigma = 05', '\sigma = 1'},'Location','southeast','FontSize',24)
+legend({'Red = 2','Red = 8', 'Red = 32'},'Location','southeast','FontSize',24)
 set(gca,'Fontsize',24);
 
-hold off
+% hold off
 
 sgtitle(titlestr,'FontSize',24);
 box on
