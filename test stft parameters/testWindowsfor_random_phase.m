@@ -70,7 +70,7 @@ for k = 1:length(soundfiles)
             c_phase = angle(c_ori);
 
             % Amplitude (random phase)
-            c_amp_rec = c_amp .* exp(1i*(c_phase + normrnd(0, 0.1, size(c_amp))));
+            c_amp_rec = c_amp .* exp(1i*(c_phase + normrnd(0, 1, size(c_amp))));
 
             %c_amp_pgla = gla(c_amp_pghi,dual,a,M,flag,'fgla','input');
 
@@ -98,8 +98,8 @@ toc
 
 tfrs = (M.^2./(L.*red)')';
 
-plotStats(1, mean(SNR, 1), M, tfrs, 'Objective quality of phaseless reconstruction', 'SC', [-60,6])
-plotStats(2, mean(to_save, 1), M, tfrs, 'Subjective quality of phaseless reconstruction', 'PEAQ', [-4,0.5])
+plotStats(1, mean(SNR, 1), tfrs, 'SC', [-60,6])
+plotStats(2, mean(to_save, 1), tfrs, 'PEAQ', [-4,0.5])
 
 
 function d=propdiv(n)
