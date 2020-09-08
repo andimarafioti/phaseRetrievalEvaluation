@@ -27,7 +27,7 @@ set(gca, 'XTick', [1e-2,1,1e2,1e4])
 legend({'midi','speech', 'electronic', 'rock'},'Location','southeast','FontSize',24)
 set(gca,'Fontsize',24);
 
-hold off
+% hold off
 
 sgtitle(titlestr,'FontSize',24);
 box on
