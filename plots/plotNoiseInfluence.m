@@ -16,7 +16,7 @@ ylim(ylimrange)
 xlabel('\lambda','FontSize',24)
 ylabel(ylabelstr,'FontSize',24)
 set(gca, 'XTick', [1e-2,1,1e2,1e4])
-legend({'Red = 2','Red = 8', 'Red = 32'},'Location','southeast','FontSize',24)
+legend({'Red = 32','Red = 8', 'Red = 2'},'Location','southeast','FontSize',24)
 set(gca,'Fontsize',24);
 
 % hold off
