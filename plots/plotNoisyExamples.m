@@ -26,7 +26,7 @@ means_SC_1 = mean(SNR_1, 1);
 means_ODG_01 = mean(to_save_01, 1);
 means_ODG_05 = mean(to_save_05, 1);
 means_ODG_1 = mean(to_save_1, 1);
-m
+
 means_SC = [means_SC_01;means_SC_05;means_SC_1];
 means_SC = means_SC(:, :, 1:2:length(red));
 means_ODG = [means_ODG_01; means_ODG_05; means_ODG_1];
