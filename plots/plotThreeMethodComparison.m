@@ -24,7 +24,7 @@ for j=1:size(means,1)
     end
     
     if j == 3 
-        legend({'red = 32','red = 16', 'red = 8', 'red = 4', 'red = 2'},'Location','southeast','FontSize',24)
+        legend({'D = 32','D = 16', 'D = 8', 'D = 4', 'D = 2'},'Location','southeast','FontSize',24)
     end
 end
     
