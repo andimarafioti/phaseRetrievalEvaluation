@@ -36,7 +36,7 @@ Markers = {'d','+','s','>','<','^', 'o','*','x','v',};
 
 for index = 1:3
     index = 4-index;
-    plotNoiseInfluence(1, squeeze(means_SC(index, :, :)), M, tfrs, 'Noisy influence at different redundancies', 'SC PGHI', [-50, 0], Markers{index})
+    plotNoiseInfluence(1, squeeze(-means_SC(index, :, :)), M, tfrs, 'Noisy influence at different redundancies', 'SC PGHI', [0, 6pl0], Markers{index})
 end
 
 for index = 1:3
