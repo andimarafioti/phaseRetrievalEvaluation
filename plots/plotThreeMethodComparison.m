@@ -10,6 +10,7 @@ for j=1:size(means,1)
     axes(ha(j));
     set(gca, 'XScale', 'log');
     set(gca,'Fontsize',32);
+    xlim([1e-4, 1e4])
     set(gca, 'XTick', [1e-2,1,1e2,1e4])
     xlabel('\lambda','FontSize',32)
     ylim(ylimrange)
@@ -24,7 +25,7 @@ for j=1:size(means,1)
     end
     
     if j == 3 
-        legend({'D = 32','D = 16', 'D = 8', 'D = 4', 'D = 2'},'Location','southeast','FontSize',24)
+        legend({'D = 32','D = 16', 'D = 8', 'D = 4', 'D = 2'},'Location','northeast','FontSize',24)
     end
 end
     
