@@ -122,7 +122,7 @@ for k = 1:length(soundfiles)
 end
 toc
 
-tfrs = repmat(window_lengths', [1, 5]);
+tfrs = (M.^2./(L.*red)')';
 
 
 plotThreeMethodComparison(1, [mean(to_save_pghi, 1); mean(to_save_spsi, 1); mean(to_save_gla, 1)], tfrs, 'ODG', ['PGHI';'SPSI';'FGLA'], [-4,0.5])
