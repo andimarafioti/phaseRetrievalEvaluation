@@ -32,13 +32,13 @@ win_SNR = {'gauss',a_SNR*M_SNR/L};
 win_SNR = gabwin(win_SNR,a_SNR,M_SNR,L);
 %% Prepare arrays for results
 
-examples = 128;
-to_save_pghi = zeros(examples, length(window_lengths), length(red));
-SNR_pghi = zeros(examples, length(window_lengths), length(red));
-to_save_spsi = zeros(examples, length(window_lengths), length(red));
-SNR_spsi = zeros(examples, length(window_lengths), length(red));
-to_save_gla = zeros(examples, length(window_lengths), length(red));
-SNR_gla = zeros(examples, length(window_lengths), length(red));
+examples = 1;
+to_save_pghi = zeros(examples, length(M), length(red));
+SNR_pghi = zeros(examples, length(M), length(red));
+to_save_spsi = zeros(examples, length(M), length(red));
+SNR_spsi = zeros(examples, length(M), length(red));
+to_save_gla = zeros(examples, length(M), length(red));
+SNR_gla = zeros(examples, length(M), length(red));
 
 %% Reconstruct signals
 
@@ -63,8 +63,8 @@ for k = 1:length(soundfiles)
     for M0 = M
         for red0 = red
             a0 = M0 / red0;
-            target_gamma = a0*M0;
-            target_hann_length = floor(sqrt(target_gamma/0.25645));
+            gamma = a0*M0;
+            target_hann_length = floor(sqrt(gamma/0.25645));
                                     
             if target_hann_length > M0
                win = firwin('hann', target_hann_length);
@@ -100,11 +100,11 @@ for k = 1:length(soundfiles)
             audiowrite('gla.wav', gla_resampled, 48000);
 
             [odg, movb] = PQevalAudio_fn('or.wav', 'pghi.wav');
-            to_save_pghi(index, window_length==window_lengths, red0==red) = odg;
+            to_save_pghi(index, M0==M, red0==red) = odg;
             [odg, movb] = PQevalAudio_fn('or.wav', 'spsi.wav');
-            to_save_spsi(index, window_length==window_lengths, red0==red) = odg;
+            to_save_spsi(index, M0==M, red0==red) = odg;
             [odg, movb] = PQevalAudio_fn('or.wav', 'gla.wav');
-            to_save_gla(index, window_length==window_lengths, red0==red) = odg;
+            to_save_gla(index, M0==M, red0==red) = odg;
             
             % Measure spectral divergence
 
@@ -113,9 +113,9 @@ for k = 1:length(soundfiles)
             re_c_amp_spsi = abs(dgtreal(f_amp_spsi,win_SNR,a_SNR,M_SNR,L,flag));
             re_c_amp_gla= abs(dgtreal(f_rec_gla,win_SNR,a_SNR,M_SNR,L,flag));
 
-            SNR_pghi(index, window_length==window_lengths, red0==red) = magnitudeerrdb(re_c_amp_pghi, re_c_amp);
-            SNR_spsi(index, window_length==window_lengths, red0==red) = magnitudeerrdb(re_c_amp_spsi, re_c_amp);
-            SNR_gla(index, window_length==window_lengths, red0==red) = magnitudeerrdb(re_c_amp_gla, re_c_amp);
+            SNR_pghi(index, M0==M, red0==red) = magnitudeerrdb(re_c_amp_pghi, re_c_amp);
+            SNR_spsi(index, M0==M, red0==red) = magnitudeerrdb(re_c_amp_spsi, re_c_amp);
+            SNR_gla(index, M0==M, red0==red) = magnitudeerrdb(re_c_amp_gla, re_c_amp);
 
         end
     end
