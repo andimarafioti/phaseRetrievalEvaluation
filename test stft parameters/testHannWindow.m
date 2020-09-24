@@ -19,7 +19,7 @@ L = 2^11 * 3 * 5;
 
 d = 32* propdiv(L/32);
 
-window_lengths = d(find(d>=64 & d<L/2));
+M = d(find(d>=64 & d<L/2));
 red = [32, 16, 8, 4, 2];
 
 %red = [4,16];
@@ -60,18 +60,19 @@ for k = 1:length(soundfiles)
     index = index + 1;
     signal = signal(1:L);
 
-    for window_length = window_lengths
-        win = {'hann',window_length};
-        dual = {'dual',win};
-        gamma = 0.25645*window_length^2;
-
-        for red0 = red        
-            hanns_M = sqrt(gamma*red0);
-            approx_M0 = red0 * round(hanns_M/red0);
-            [val, idx] = min(abs(window_lengths-approx_M0));
-            M0 = window_lengths(idx);
-            
+    for M0 = M
+        for red0 = red
             a0 = M0 / red0;
+            target_gamma = a0*M0;
+            target_hann_length = floor(sqrt(target_gamma/0.25645));
+                                    
+            if target_hann_length > M0
+               win = firwin('hann', target_hann_length);
+               win = fir2long(win, L); 
+            else
+                win = {'hann',target_hann_length};
+            end
+            dual = {'dual',win};
 
             c_ori = dgtreal(signal,win,a0,M0,L,flag); % DGT of original
             c_amp = abs(c_ori); % Initialize magnitude
