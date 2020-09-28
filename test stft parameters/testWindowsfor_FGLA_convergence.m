@@ -8,21 +8,21 @@
 % soundfiles = dir(base_folder);
 % soundfiles = soundfiles(4:end);
 
-examples = 128;
+examples = 1;
 base_folder = '\\kfsnas08.kfs.oeaw.ac.at\Denklast\amarafioti\Documents\Datasets\LJSpeech-1.1\wavs\';
-%soundfiles = findWavFiles(base_folder);
-%soundfiles = soundfiles(1:examples);
+soundfiles = findWavFiles(base_folder);
+soundfiles = soundfiles(1:examples);
 
 %% STFT parameters 
 
 L = 2^13 * 3 * 5;
-
 tfr = 0.6;
 
-red = [32, 16, 8, 4, 2];
-
 d = 32* propdiv(L/32);
-M = d(find(d>=64 & d<L/2));
+
+M = d(find(d>=64 & d<L/3));
+
+red = [32, 16, 8, 4, 2];
 
 flag = 'timeinv';
 
@@ -32,10 +32,12 @@ win_SNR = {'gauss',a_SNR*M_SNR/L};
 win_SNR = gabwin(win_SNR,a_SNR,M_SNR,L);
 %% Prepare arrays for results
 
-steps_iteration = 10;
-num_iterations = 100;
-ODG_gla = zeros(1, num_iterations/steps_iteration, length(red));
-SC_gla = zeros(1, num_iterations/steps_iteration, length(red));
+base_steps_iteration = 10;
+base_num_iterations = 100;
+
+ODG_gla = zeros(1, base_num_iterations/base_steps_iteration, length(red));
+SC_gla = zeros(1, base_num_iterations/base_steps_iteration, length(red));
+
 time_gla = zeros(1, length(red));
 
 %% Reconstruct signals
@@ -71,17 +73,21 @@ for k = 1:length(soundfiles)
         signal_resampled = resample(signal(M0:end-M0), 48000, fs);
         % FGLA
         tic
-        [c_rec_gla, f_rec_gla] = modGla(c_amp,win,a0,M0, 'print', 'fgla');
+        multiplier = 2;
+        num_iterations = base_num_iterations*multiplier;
+        steps_iteration = base_steps_iteration*multiplier;
+        
+        [c_rec_gla, f_rec_gla] = modGla(c_amp,win,a0,M0, 'print', 'fgla', 'maxit', num_iterations, 'printstep', steps_iteration);
         time_gla(size(time_gla, 1), red0==red) = toc;
 
         for iteration = 1: num_iterations/steps_iteration
             % Measure PEAQ
             gla_resampled = resample(f_rec_gla(iteration, M0:end-M0), 48000, fs);
 
-            audiowrite('or.wav', signal_resampled, 48000);
-            audiowrite('gla.wav', gla_resampled, 48000);
+            audiowrite('or_con.wav', signal_resampled, 48000);
+            audiowrite('gla_con.wav', gla_resampled, 48000);
 
-            [odg, movb] = PQevalAudio_fn('or.wav', 'gla.wav');
+            [odg, movb] = PQevalAudio_fn('or_con.wav', 'gla_con.wav');
             ODG_gla(size(ODG_gla, 1), iteration, red0==red) = odg;
 
             % Measure spectral divergence
@@ -96,8 +102,11 @@ for k = 1:length(soundfiles)
 end
 toc
 
-plotConvergence(1, mean(ODG_gla(2:end, :, :), 1), red, 'Perceptual convergence of FGLA', 'PEAQ', [-3,0.5])
-plotConvergence(2, mean(SC_gla(2:end, :, :), 1), red, 'Objective convergence of FGLA', 'SC', [-30,-5])
+ODG_gla = ODG_gla(2:end, :, :);
+SC_gla = SC_gla(2:end, :, :);
+
+plotConvergence(1, mean(ODG_gla, 1), red, 'Perceptual convergence of FGLA', 'PEAQ', [-3,0.5])
+plotConvergence(2, mean(SC_gla, 1), red, 'Objective convergence of FGLA', 'SC', [-40,-5])
 
 function d=propdiv(n)
 % PROPDIV   - Proper divisors of integer
