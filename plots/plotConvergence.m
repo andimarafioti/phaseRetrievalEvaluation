@@ -1,5 +1,5 @@
 
-function plotConvergence(index, means, red, titlestr, ylabelstr, ylimrange)
+function plotConvergence(index, means, red, ylabelstr, ylimrange)
 sr = 22050;
 colors = [[0, 0.4470, 0.7410]; [0.8500, 0.3250, 0.0980]; [0.9290, 0.6940, 0.1250]; [0.4940, 0.1840, 0.5560]; [0.4660, 0.6740, 0.1880]];
 
@@ -19,7 +19,5 @@ legend({'red = 32','red = 16', 'red = 8', 'red = 4', 'red = 2'},'Location','sout
 set(gca,'Fontsize',24);
 
 ylim(ylimrange)
-
-sgtitle(titlestr,'FontSize',24);
 
 end
