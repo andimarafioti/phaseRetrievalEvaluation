@@ -9,7 +9,7 @@ set(f, 'Position', [10 10 900 420])
 %First
 hold on
 for i=1:size(means,3)
-    plot((10:100/size(means, 2):100)*times(i)/100, means(1, :, i),'LineWidth',4, 'Color', colors(i, :))
+    plot(times(i)*(1:size(means(1, :, i), 2))/size(means(1, :, i), 2), means(1, :, i),'LineWidth',4, 'Color', colors(i, :))
 end
 
 xlabel('Time (secs)','FontSize',24)
