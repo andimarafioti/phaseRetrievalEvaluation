@@ -1,7 +1,7 @@
 clear all
 
-% ltfatstart(); % start the ltfat toolbox
-% phaseretstart;
+ltfatstart(); % start the ltfat toolbox
+phaseretstart;
 
 %%
 % base_folder = '\\kfsnas08\Denklast\amarafioti\Documents\Datasets\Lakh\new-simple-piano\';
@@ -19,7 +19,7 @@ L = 2^11 * 3 * 5;
 
 d = 32* propdiv(L/32);
 
-M = d(find(d>=64 & d<L/2));
+M = d(find(d>=64 & d<L/3));
 red = [32, 16, 8, 4, 2];
 
 %red = [4,16];
@@ -32,7 +32,7 @@ win_SNR = {'gauss',a_SNR*M_SNR/L};
 win_SNR = gabwin(win_SNR,a_SNR,M_SNR,L);
 %% Prepare arrays for results
 
-examples = 1;
+examples = 128;
 to_save_pghi = zeros(examples, length(M), length(red));
 SNR_pghi = zeros(examples, length(M), length(red));
 to_save_spsi = zeros(examples, length(M), length(red));
@@ -125,8 +125,8 @@ toc
 tfrs = (M.^2./(L.*red)')';
 
 
-plotThreeMethodComparison(1, [mean(to_save_pghi, 1); mean(to_save_spsi, 1); mean(to_save_gla, 1)], tfrs, 'ODG', ['PGHI';'SPSI';'FGLA'], [-4,0.5])
-plotThreeMethodComparison(2, [-mean(SNR_pghi, 1); -mean(SNR_spsi, 1); -mean(SNR_gla, 1)], tfrs, 'SC', [' ';' ';' '], [0, 60])
+plotThreeMethodComparison(1, [mean(to_save_pghi, 1); mean(to_save_gla, 1); mean(to_save_spsi, 1)], tfrs, 'ODG', ['PGHI';'FGLA';'SPSI'], [-4,0.5])
+plotThreeMethodComparison(2, [-mean(SNR_pghi, 1); -mean(SNR_gla, 1); -mean(SNR_spsi, 1)], tfrs, 'SC', [' ';' ';' '], [0, 60])
 
 
 function d=propdiv(n)
