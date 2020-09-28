@@ -1,6 +1,5 @@
-function plotDiffData(index, means, M, tfrs, titlestr, ylabelstr, ylimrange, faceColor)
+function plotDiffData(index, means, M, tfrs, ylabelstr, ylimrange, faceColor)
 sr = 22050;
-colors = [[0, 0.4470, 0.7410]; [0.8500, 0.3250, 0.0980]; [0.9290, 0.6940, 0.1250]; [0.4940, 0.1840, 0.5560]; [0.4660, 0.6740, 0.1880]];
 
 f = figure(index);
 set(f, 'Position', [0 0 750 1000])
@@ -16,8 +15,9 @@ h(1).EdgeAlpha = 0;
 h(2).FaceColor = faceColor;
 h(2).FaceAlpha = 0.7;
 
+line_styles = {'-'; '--'; ':'; '-.'};
 for i=1:size(means,1)
-    semilogx(tfrs(:), means(i, :), 'LineWidth',4, 'Color', colors(i, :))
+    semilogx(tfrs(:), means(i, :), 'LineWidth',4, 'LineStyle', line_styles{i}, 'Color', 'k')
 end
 
 ylim(ylimrange)
@@ -29,6 +29,5 @@ set(gca,'Fontsize',24);
 
 % hold off
 
-sgtitle(titlestr,'FontSize',24);
 box on
 end

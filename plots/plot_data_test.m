@@ -15,9 +15,8 @@ means_SC_rock = mean(SC_rock, 1);
 means_SC = [means_SC_midi;means_SC_speech;means_SC_electronic;means_SC_rock];
 
 faceColor = [0 0.2 0.2];
-for index = 1:2:length(red)
-    index = length(red)-index+1;
-    plotDiffData(1, means_SC(:, :, index), M, tfrs(:, index), 'Data dependency at different redundancies', 'SC PGHI', [-60, 0], faceColor*((index+1)/2))
+for index = 1:length(red)
+    plotDiffData(1, means_SC(:, :, index), M, tfrs(:, index), 'Data dependency at different redundancies', 'SC PGHI', [-60, 0], faceColor*index)
 end
 
 means_ODG_midi = mean(ODG_midi, 1);
