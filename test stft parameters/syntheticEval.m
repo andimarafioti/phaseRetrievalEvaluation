@@ -78,7 +78,8 @@ pulse_signal(2:int32(L/number_of_pulses):end) = 1;
 SNR_pghi(3, :, :) = analyse(pulse_signal, red, M, L);
 
 
-figure(1);
+f = figure(1);
+set(f, 'Position', [10 10 1800 840])
 
 ax1 = subplot(231);
 plotdgtreal(dgtreal(harmonic_signal, {'gauss',a_SNR*M_SNR/L}, a_SNR, M_SNR),  a_SNR, M_SNR, fs, 50)
