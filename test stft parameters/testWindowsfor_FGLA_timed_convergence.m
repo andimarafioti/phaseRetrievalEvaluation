@@ -8,7 +8,7 @@
 % soundfiles = dir(base_folder);
 % soundfiles = soundfiles(4:end);
 
-examples = 1;
+examples = 128;
 base_folder = '\\kfsnas08.kfs.oeaw.ac.at\Denklast\amarafioti\Documents\Datasets\LJSpeech-1.1\wavs\';
 soundfiles = findWavFiles(base_folder);
 soundfiles = soundfiles(1:examples);
@@ -110,6 +110,7 @@ timed_gla = mean(time_gla(2,:), 1);
 plotTimedConvergence(3, mean(ODG_gla, 1), red, timed_gla, 'ODG', [-3,0.5])
 plotTimedConvergence(4, -mean(SC_gla, 1), red, timed_gla, 'SC', [5,50])
 
+save('convergence_fgla_timed_ljspeech.mat', 'ODG_gla', 'SC_gla', 'M', 'red', 'L', 'timed_gla')
 function d=propdiv(n)
 % PROPDIV   - Proper divisors of integer
 %
