@@ -98,35 +98,40 @@ ylabel('')
 yticklabels('')
 
 
-tfrs = (M.^2./(L.*red)')';
+tfrs = (M.^2./(fs.*red)')';
 
 ax4 = subplot(234);
 semilogx(tfrs, -SNR_pghi(1, :, :),'LineWidth',3)
 set(gca,'Fontsize',24);
 ylim([5, 100])
-xlim([5e-5, 2000])
+xlim([1e-3, 1e4])
+set(gca, 'XTick', [1e-3,1e-1,1e1,1e3])
 xlabel('\lambda','FontSize',24)
-ylabel('SC','FontSize',24)
-set(gca,'xtick',[1e-3, 1e0, 2e3], 'xticklabels', {'1e-3', '1e0', '2e3'})
+ylabel('SNR_{MS}','FontSize',24)
+% set(gca,'xtick',[1e-3, 1e0, 2e3], 'xticklabels', {'1e-3', '1e0', '2e3'})
 
 ax5 = subplot(235);
 semilogx(tfrs, -SNR_pghi(2, :, :),'LineWidth',3)
 set(gca,'Fontsize',24);
 ylim([5, 100])
-xlim([5e-5, 2000])
+% xlim([5e-5, 2000])
 xlabel('\lambda','FontSize',24)
 set(gca,'ytick',[-100, -50, 0], 'yticklabels', [])
-set(gca,'xtick',[1e-3, 1e0, 2e3], 'xticklabels', {'1e-3', '1e0', '2e3'})
+% set(gca,'xtick',[1e-3, 1e0, 2e3], 'xticklabels', {'1e-3', '1e0', '2e3'})
+xlim([1e-3, 1e4])
+set(gca, 'XTick', [1e-3,1e-1,1e1,1e3])
 
 ax6 = subplot(236);
 semilogx(tfrs, -SNR_pghi(3, :, :),'LineWidth',3)
 set(gca,'Fontsize',24);
 ylim([5, 100])
-xlim([5e-5, 2000])
+% xlim([5e-5, 2000])
 xlabel('\lambda','FontSize',24)
 % ylabel('SC','FontSize',24)
 yticklabels('')
-set(gca,'xtick',[1e-3, 1e0, 2e3], 'xticklabels', {'1e-3', '1e0', '2e3'})
+% set(gca,'xtick',[1e-3, 1e0, 2e3], 'xticklabels', {'1e-3', '1e0', '2e3'})
+xlim([1e-3, 1e4])
+set(gca, 'XTick', [1e-3,1e-1,1e1,1e3])
 
 % for k = 1:examples
 % k
