@@ -1,15 +1,15 @@
 clear all
 
-%ltfatstart(); % start the ltfat toolbox
-%phaseretstart;
+ltfatstart(); % start the ltfat toolbox
+phaseretstart;
 
-L = 2^11 * 3 * 5;
+L = 2^13 * 3 * 5;
 
 d = 32* propdiv(L/32);
 
 M = d(find(d>=64 & d<L/2));
 M = [32 M];
-red = [32, 8, 2];
+red = [8, 2];
 
 tfrs = (M.^2./(L.*red)')';
 
@@ -30,6 +30,5 @@ soundfiles = findMp3Files(base_folder);
 soundfiles = soundfiles(1:examples);
 [ODG_electronic_FGLA, SC_electronic_FGLA] = evalFGLAOnFolder(soundfiles, M, red, L);
 
-
-
+save('fgla_diff_data_2.mat', 'ODG_midi_FGLA', 'SC_midi_FGLA', 'ODG_speech_FGLA', 'SC_speech_FGLA', 'ODG_electronic_FGLA', 'SC_electronic_FGLA', 'M', 'red', 'L')
 
