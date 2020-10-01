@@ -14,8 +14,9 @@ end
 
 xlabel('Time (secs)','FontSize',24)
 ylabel(ylabelstr,'FontSize',24)
-set(gca, 'XTick', [1, 1e1, 2e1])
-legend({'red = 32','red = 16', 'red = 8', 'red = 4', 'red = 2'},'Location','southeast','FontSize',24)
+% set(gca, 'XTick', [1, 1e1, 2e1])
+xlim([0, 50])
+% legend({'D = 32','D = 16', 'D = 8', 'D = 4', 'D = 2'},'Location','southeast','FontSize',24)
 set(gca,'Fontsize',24);
 
 ylim(ylimrange)
