@@ -20,10 +20,12 @@ for i=1:size(means,1)
     semilogx(tfrs(:), means(i, :), 'LineWidth',4, 'LineStyle', line_styles{i}, 'Color', 'k')
 end
 
+xlim([1e-3, 2e4])
+set(gca, 'XTick', [1e-3,1e-1,1e1,1e3])
+
 ylim(ylimrange)
 xlabel('\lambda','FontSize',24)
 ylabel(ylabelstr,'FontSize',24)
-set(gca, 'XTick', [1e-2,1,1e2,1e4])
 legend({'midi','speech', 'electronic'},'Location','southeast','FontSize',24)
 set(gca,'Fontsize',24);
 
