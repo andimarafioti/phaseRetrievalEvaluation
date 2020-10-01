@@ -10,8 +10,8 @@ for j=1:size(means,1)
     axes(ha(j));
     set(gca, 'XScale', 'log');
     set(gca,'Fontsize',32);
-    xlim([1e-4, 1e4])
-    set(gca, 'XTick', [1e-2,1,1e2,1e4])
+    xlim([1e-3, 2e4])
+    set(gca, 'XTick', [1e-3,1e-1,1e1,1e3])
     xlabel('\lambda','FontSize',32)
     ylim(ylimrange)
     box on

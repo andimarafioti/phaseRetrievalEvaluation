@@ -1,4 +1,4 @@
-function plotNoiseInfluence(index, means, M, tfrs, titlestr, ylabelstr, ylimrange, marker)
+function plotNoiseInfluence(index, means, M, tfrs, ylabelstr, ylimrange, marker)
 sr = 22050;
 colors = [[0, 0.4470, 0.7410]; [0.9290, 0.6940, 0.1250]; [0.4660, 0.6740, 0.1880]];
 
@@ -15,12 +15,11 @@ end
 ylim(ylimrange)
 xlabel('\lambda','FontSize',24)
 ylabel(ylabelstr,'FontSize',24)
-set(gca, 'XTick', [1e-2,1,1e2,1e4])
-legend({'Red = 32','Red = 8', 'Red = 2'},'Location','southeast','FontSize',24)
+xlim([1e-3, 2e4])
+set(gca, 'XTick', [1e-3,1e-1,1e1,1e3])
+legend({'D = 32','D = 8', 'D = 2'},'Location','northeast','FontSize',24)
 set(gca,'Fontsize',24);
 
 % hold off
-
-sgtitle(titlestr,'FontSize',24);
 box on
 end
