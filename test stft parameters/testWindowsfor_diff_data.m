@@ -18,22 +18,22 @@ examples = 128;
 base_folder = '\\kfsnas08.kfs.oeaw.ac.at\Denklast\amarafioti\Documents\Datasets\Lakh\new-simple-piano\';
 soundfiles = findWavFiles(base_folder);
 soundfiles = soundfiles(1:examples);
-[ODG_midi_PGHI, SC_midi_PGHI, ODG_midi_SPSI, SC_midi_SPSI] = evalPGHIOnFolder(soundfiles, M, red, L);
+[ODG_midi_PGHI, SC_midi_PGHI, ODG_midi_SPSI, SC_midi_SPSI] = evalPGHIandSPSIOnFolder(soundfiles, M, red, L);
 
 base_folder = '\\kfsnas08.kfs.oeaw.ac.at\Denklast\amarafioti\Documents\Datasets\LJSpeech-1.1\wavs\';
 soundfiles = findWavFiles(base_folder);
 soundfiles = soundfiles(1:examples);
-[ODG_speech_PGHI, SC_speech_PGHI, ODG_speech_SPSI, SC_speech_SPSI] = evalPGHIOnFolder(soundfiles, M, red, L);
+[ODG_speech_PGHI, SC_speech_PGHI, ODG_speech_SPSI, SC_speech_SPSI] = evalPGHIandSPSIOnFolder(soundfiles, M, red, L);
 
 base_folder = '\\kfsnas08.kfs.oeaw.ac.at\Denklast\amarafioti\Documents\Datasets\fma_electronic\';
 soundfiles = findMp3Files(base_folder);
 soundfiles = soundfiles(1:examples);
-[ODG_electronic_PGHI, SC_electronic_PGHI, ODG_electronic_SPSI, SC_electronic_SPSI] = evalPGHIOnFolder(soundfiles, M, red, L);
+[ODG_electronic_PGHI, SC_electronic_PGHI, ODG_electronic_SPSI, SC_electronic_SPSI] = evalPGHIandSPSIOnFolder(soundfiles, M, red, L);
 
 base_folder = '\\kfsnas08.kfs.oeaw.ac.at\Denklast\amarafioti\Documents\Datasets\fma_rock\';
 soundfiles = findMp3Files(base_folder);
 soundfiles = soundfiles(1:examples);
-[ODG_rock_PGHI, SC_rock_PGHI, ODG_rock_SPSI, SC_rock_SPSI] = evalPGHIOnFolder(soundfiles, M, red, L);
+[ODG_rock_PGHI, SC_rock_PGHI, ODG_rock_SPSI, SC_rock_SPSI] = evalPGHIandSPSIOnFolder(soundfiles, M, red, L);
 
 
 
