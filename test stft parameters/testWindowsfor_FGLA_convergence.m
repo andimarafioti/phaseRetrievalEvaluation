@@ -8,7 +8,7 @@
 % soundfiles = dir(base_folder);
 % soundfiles = soundfiles(4:end);
 
-examples = 1;
+examples = 128;
 base_folder = '\\kfsnas08.kfs.oeaw.ac.at\Denklast\amarafioti\Documents\Datasets\LJSpeech-1.1\wavs\';
 soundfiles = findWavFiles(base_folder);
 soundfiles = soundfiles(1:examples);
