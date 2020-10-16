@@ -40,7 +40,7 @@ for index = 1:length(soundfiles)
         for red0 = red
             a0 = M0 / red0;
 
-            win = {'gauss',a0*M0/L};
+            win = {'gauss',a0*M0/L}; % Lambda differs from the definition in the paper because LTFAT's gaussian is defined differently
             win = gabwin(win,a0,M0,L);
             gamma = a0*M0;
             dual = {'dual',win};
