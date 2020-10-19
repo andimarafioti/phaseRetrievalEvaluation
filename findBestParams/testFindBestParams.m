@@ -1,12 +1,12 @@
 clear all
 
-%ltfatstart(); % start the ltfat toolbox
-%phaseretstart;
+% ltfatstart(); % start the ltfat toolbox
+% phaseretstart;
 
 base_folder = '\\kfsnas08.kfs.oeaw.ac.at\Denklast\amarafioti\Documents\Datasets\LJSpeech-1.1\wavs\';
 soundfiles = dir(base_folder);
-soundfiles = soundfiles(3:end);
-examples = 32;
+ssoundfiles = soundfiles(3:end);
+examples = 64;
 array_of_signal_paths = strings(examples,1);
 
 index = 0;
@@ -21,13 +21,12 @@ d = 32* propdiv(L/32);
 Ms = d(find(d>=128 & d<L/8));
 Ds = [32, 16, 8, 4];
 
-odg_threshold = 0.3;
-SNR_threshold = 5;
+odg_threshold = 0.5;
+SNR_threshold = 10;
 
-[best_M_pghi, best_D_pghi] = findBestParams(pghi_func, array_of_signal_paths, Ms, Ds, L, odg_threshold, SNR_threshold);
-[best_M_fgla, best_D_fgla] = findBestParams(fgla_func, array_of_signal_paths, Ms, Ds, L, odg_threshold, SNR_threshold);
-[best_M_spsi, best_D_spsi] = findBestParams(spsi_func, array_of_signal_paths, Ms, Ds, L, odg_threshold, SNR_threshold);
-
+[best_M_pghi, best_D_pghi] = findBestParams(@pghi_func, array_of_signal_paths, Ms, Ds, L, odg_threshold, SNR_threshold);
+[best_M_fgla, best_D_fgla] = findBestParams(@fgla_func, array_of_signal_paths, Ms, Ds, L, odg_threshold, SNR_threshold);
+[best_M_spsi, best_D_spsi] = findBestParams(@spsi_func, array_of_signal_paths, Ms, Ds, L, odg_threshold, SNR_threshold);
 
 
 function c_amp_pghi = pghi_func(c_amp, a, M)
