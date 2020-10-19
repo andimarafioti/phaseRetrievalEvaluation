@@ -62,18 +62,19 @@ SNRs_ms = SNRs_ms(1:index, :, :);
  
 mean_ODGs = squeeze(mean(ODGs, 1)); % remove meaned dimension
 max_ODGs = max(mean_ODGs, [], 'all');
-% good_ODGs = mean_ODGs(mean_ODGs > max_ODGs-odg_threshold);
 
 mean_SNRs_ms = squeeze(mean(SNRs_ms, 1));
 min_SNRs_ms = min(mean_SNRs_ms, [], 'all');
-% good_SNRs_ms = mean_SNRs_ms(mean_SNRs_ms < min_SNRs_ms + SNR_threshold);
 
 good_on_both_measures = (mean_ODGs > max_ODGs-odg_threshold) & (mean_SNRs_ms < min_SNRs_ms + SNR_threshold);
-
-rep_M = repmat(Ms, [length(Ds), 1]);
+ 
+rep_M = repmat(Ms, [length(Ds), 1])';
 rep_Ds = repmat(Ds, [length(Ms), 1]);
 
-bestMs = nonzeros(rep_M(good_on_both_measures'));
-bestDs = nonzeros(rep_Ds(good_on_both_measures));
+rep_M(~good_on_both_measures) = 0;
+rep_Ds(~good_on_both_measures) = 0;
+
+bestMs = nonzeros(rep_M);
+bestDs = nonzeros(rep_Ds);
 
 end
