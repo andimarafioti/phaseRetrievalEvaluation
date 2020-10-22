@@ -1,5 +1,27 @@
 function [bestMs, bestDs]= findBestParams(phaseretfunc, array_of_signal_paths, Ms, Ds, L, odg_threshold, SNR_threshold)
 
+%findBestParams Algorithm to find the STFT parameters that optimize a phase
+%retrieval algorithm
+%   Usage: [bestMs, bestDs] = findBestParams(@phaseretfunc, array_of_signal_paths, Ms, Ds, L, odg_threshold, SNR_threshold)
+%
+%   Input parameters:
+%         phaseretfunc          : Phase retrieval function taking as input: c_amp, a, M.
+%         array_of_signal_paths : String array containing paths to audio
+%         signals
+%         Ms                    : Array of number of channels to evaluate
+%         Ds                    : Array of redundancies to evaluate
+%         L                     : Length of signal to evaluate.
+%         odg_threshold         : threshold to select best values, from the
+%         maximum ODG
+%         SNR_threshold         : threshold to select best values, from the
+%         maximum SNR
+%
+%   Output parameters:
+%         bestMs                : Ranges of number of channels at which 
+%         best performances are obtained
+%         bestDs                : Redundancies at which the best 
+%         performances are obtained.
+
 ODGs = zeros(length(array_of_signal_paths), length(Ms), length(Ds));
 SNRs_ms = zeros(size(ODGs));
 
