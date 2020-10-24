@@ -1,4 +1,4 @@
-%clear all
+clear all
 
 % ltfatstart(); % start the ltfat toolbox
 % phaseretstart;
@@ -36,7 +36,7 @@ num_iterations = 200;
 ODG_gla = zeros(1, num_iterations/steps_iteration, length(M));
 SC_gla = zeros(1, num_iterations/steps_iteration, length(M));
 
-time_gla = zeros(1, length(red));
+time_gla = zeros(1, length(M));
 
 %% Reconstruct signals
 
@@ -68,10 +68,9 @@ for k = 1:length(soundfiles)
         audiowrite('or_con.wav', signal_resampled, 48000);
 
         % FGLA
-        tic
 
         [c_rec_gla, f_rec_gla] = modGla(c_amp,win,a0,M0, 'print', 'fgla', 'maxit', num_iterations, 'printstep', steps_iteration);
-        time_gla(size(time_gla, 1), red0==red) = toc;
+        time_gla(size(time_gla, 1), M0==M) = toc;
 
         for iteration = 1: num_iterations/steps_iteration
             % Measure PEAQ
@@ -96,12 +95,12 @@ toc
 ODG_gla = ODG_gla(2:end, :, :);
 SC_gla = SC_gla(2:end, :, :);
 
+figure(1)
 surf(squeeze(mean(ODG_gla, 1)))
+set(gca,'XScale','log')
+figure(2)
 surf(squeeze(mean(SC_gla, 1)))
-
-
-plotConvergence(1, mean(ODG_gla, 1), red, 'Perceptual convergence of FGLA', [-3,0.5])
-plotConvergence(2, mean(SC_gla, 1), red, 'Objective convergence of FGLA', [-40,-5])
+set(gca,'XScale','log')
 
 function d=propdiv(n)
 % PROPDIV   - Proper divisors of integer
