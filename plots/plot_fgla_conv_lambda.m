@@ -1,11 +1,11 @@
 clear all
-load('fgla_conv_lambda.mat')
+load('fgla_conver_lambda.mat')
 
 sr = 22050;
 tfrs = M.^2/(22080*red0);
 
-means_ODG = [squeeze(mean(ODG_gla(:, 1, :), 1)), squeeze(mean(ODG_gla(:, 10, :), 1)), squeeze(mean(ODG_gla(:, 20, :), 1)), squeeze(mean(ODG_gla(:, 40, :), 1))];
-means_SC = [squeeze(mean(SC_gla(:, 1, :), 1)), squeeze(mean(SC_gla(:, 10, :), 1)), squeeze(mean(SC_gla(:, 20, :), 1)), squeeze(mean(SC_gla(:, 40, :), 1))];
+means_ODG = [squeeze(mean(ODG_gla(:, 1, :), 1)), squeeze(mean(ODG_gla(:, 6, :), 1)), squeeze(mean(ODG_gla(:, 20, :), 1)), squeeze(mean(ODG_gla(:, 60, :), 1))];
+means_SC = [squeeze(mean(SC_gla(:, 1, :), 1)), squeeze(mean(SC_gla(:, 6, :), 1)), squeeze(mean(SC_gla(:, 20, :), 1)), squeeze(mean(SC_gla(:, 60, :), 1))];
 
 plotConvLambda(1, means_ODG , tfrs, 'ODG', [-4, 0.5], false)
 plotConvLambda(2, means_SC, tfrs, 'SNR_{MS}', [0, 60], true)
@@ -30,6 +30,6 @@ end
 ylabel(ylabelstr,'FontSize',32)
 
 if leg
-    legend({'iter = 5','iter = 50', 'iter = 100', 'iter = 200'},'Location','northeast','FontSize',24)
+    legend({'iter = 5','iter = 30', 'iter = 100', 'iter = 300'},'Location','northeast','FontSize',24)
 end
 end
