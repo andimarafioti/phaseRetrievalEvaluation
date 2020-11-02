@@ -14,7 +14,7 @@ function plotConvLambda(index, means, tfrs, ylabelstr, ylimrange, leg)
 
 f = figure(index);
 set(f, 'Position', [10 10 600 900])
-Markers = {'d','+','s','^', 'o','*','x','v',};
+lineStyles = { ':', '--', '-.', '-'};
 
 set(gca, 'XScale', 'log');
 set(gca,'Fontsize',32);
@@ -25,7 +25,7 @@ ylim(ylimrange)
 box on
 hold on
 for i=1:size(means,2)
-    semilogx(tfrs, means(:, i), strcat('-',Markers{i}),'MarkerSize',8, 'LineWidth',5, 'Color', [0.9290, 0.6940, 0.1250])
+    semilogx(tfrs, means(:, i), lineStyles{i}, 'LineWidth',5, 'Color', [0.9290, 0.6940, 0.1250])
 end
 ylabel(ylabelstr,'FontSize',32)
 
