@@ -8,7 +8,7 @@ In audio processing applications, phase retrieval (PR) is often performed from s
 
 ## Resources
 
-- The pre-print can be read on [arxiv]().
+- The paper will be available after going through peer-review.
 
 
 ### Acknowledgments
