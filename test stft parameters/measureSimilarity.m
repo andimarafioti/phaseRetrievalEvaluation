@@ -3,9 +3,12 @@ function [SNR, PEAQ, PEMOQ] = measureSimilarity(ref, signal, fs, M0, L)
             ref48k = resample(ref(M0:end-M0), 48000, fs);
             signal48k = resample(signal(M0:end-M0), 48000, fs);
             
-            audiowrite('ref.wav', ref48k, 48000);
-            audiowrite('signal.wav', signal48k, 48000);
-            [PEAQ, movb] = PQevalAudio_fn('ref.wav', 'signal.wav');
+            original = strcat('tmp/ref', randi(10000, 1, 1), '.wav');
+            test_signal = strcat('tmp/signal', randi(10000, 1, 1), '.wav');
+            
+            audiowrite(original, ref48k, 48000);
+            audiowrite(test_signal, signal48k, 48000);
+            [PEAQ, movb] = PQevalAudio_fn(original, test_signal);
             
             % Measure PEMO-Q
             [m_rec,fr] = pemo_internal(signal(M0:end-M0), fs, "fb");
