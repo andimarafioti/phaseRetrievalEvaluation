@@ -1,5 +1,7 @@
 clear all
 
+addpath('utils', genpath('ltfat'), genpath('phaseret'), 'test stft parameters', genpath('PEASS-Software-v2.0.1'), genpath('PEAQ'))
+
 ltfatstart(); % start the ltfat toolbox
 phaseretstart;
 
@@ -21,8 +23,8 @@ d = 32* propdiv(L/32);
 
 M = d(find(d>=64 & d<L/2));
 M = [32 M];
-M = M(1:3:end);
-red = [32,  2];
+M = M(1:end);
+red = [32, 8, 2];
 
 %red = [4,16];
 %M=[512, 1024, 2048];
@@ -102,11 +104,11 @@ for k = 1:length(soundfiles)
             f_amp_pghi = idgtreal(c_amp_pghi,dual,a0,M0,flag);
 
             % Inconsistent amplitude processing (FGLA)
-            %[c_rec_gla,f_rec_gla] = gla(c_amp.*sampled_filterbank,win,a0,M0,'fgla');
+            [c_rec_gla,f_rec_gla] = gla(c_amp.*sampled_filterbank,win,a0,M0,'fgla');
 
             % Inconsistent amplitude processing (SPSI)
-            %c_amp_spsi = spsi(c_amp.*sampled_filterbank,a0,M0,flag);
-            %f_amp_spsi = idgtreal(c_amp_spsi,dual,a0,M0,flag);
+            c_amp_spsi = spsi(c_amp.*sampled_filterbank,a0,M0,flag);
+            f_amp_spsi = idgtreal(c_amp_spsi,dual,a0,M0,flag);
 
             % Measure similarity
             [SNR, PEAQ, PEMOQ] = measureSimilarity(filtered_signal, f_amp_rec, fs, M0, L);          
@@ -119,20 +121,22 @@ for k = 1:length(soundfiles)
             to_save_pemoq_pghi(index, M0==M, red0==red) = PEMOQ;
             SNR_pghi(index, M0==M, red0==red) = SNR;
 
-%             [SNR, PEAQ, PEMOQ] = measureSimilarity(filtered_signal, f_rec_gla, fs, M0, L);          
-%             to_save_peaq_fgla(index, M0==M, red0==red) = PEAQ;
-%             to_save_pemoq_fgla(index, M0==M, red0==red) = PEMOQ;
-%             SNR_fgla(index, M0==M, red0==red) = SNR;
-% 
-%             [SNR, PEAQ, PEMOQ] = measureSimilarity(filtered_signal, f_amp_spsi, fs, M0, L);          
-%             to_save_peaq_spsi(index, M0==M, red0==red) = PEAQ;
-%             to_save_pemoq_spsi(index, M0==M, red0==red) = PEMOQ;
-%             SNR_spsi(index, M0==M, red0==red) = SNR;
-
+            [SNR, PEAQ, PEMOQ] = measureSimilarity(filtered_signal, f_rec_gla, fs, M0, L);          
+            to_save_peaq_fgla(index, M0==M, red0==red) = PEAQ;
+            to_save_pemoq_fgla(index, M0==M, red0==red) = PEMOQ;
+            SNR_fgla(index, M0==M, red0==red) = SNR;
+ 
+            [SNR, PEAQ, PEMOQ] = measureSimilarity(filtered_signal, f_amp_spsi, fs, M0, L);          
+            to_save_peaq_spsi(index, M0==M, red0==red) = PEAQ;
+            to_save_pemoq_spsi(index, M0==M, red0==red) = PEMOQ;
+            SNR_spsi(index, M0==M, red0==red) = SNR;
+            toc
         end
     end
+    save("magnitudeProcessingTest.mat", "to_save_peaq_real", "to_save_pemoq_real", "SNR_real", "to_save_peaq_pghi", "to_save_pemoq_pghi", "SNR_pghi", "to_save_peaq_fgla", "to_save_pemoq_fgla", "SNR_fgla", "to_save_peaq_spsi", "to_save_pemoq_spsi", "SNR_spsi", "M", "L")
 end
 toc
+
 
 tfrs = (M.^2./(L.*red)')';
 
