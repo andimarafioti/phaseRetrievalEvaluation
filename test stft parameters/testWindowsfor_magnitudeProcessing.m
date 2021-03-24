@@ -2,7 +2,7 @@ clear all
 
 addpath('utils', genpath('ltfat'), genpath('phaseret'), 'test stft parameters', genpath('PEASS-Software-v2.0.1'), genpath('PEAQ'))
 
-ltfatstart(); % start the ltfat toolbox
+%ltfatstart(); % start the ltfat toolbox
 phaseretstart;
 
 %%
@@ -133,7 +133,7 @@ for k = 1:length(soundfiles)
             toc
         end
     end
-    save("magnitudeProcessingTest.mat", "to_save_peaq_real", "to_save_pemoq_real", "SNR_real", "to_save_peaq_pghi", "to_save_pemoq_pghi", "SNR_pghi", "to_save_peaq_fgla", "to_save_pemoq_fgla", "SNR_fgla", "to_save_peaq_spsi", "to_save_pemoq_spsi", "SNR_spsi", "M", "L")
+    save(strcat("magnitudeProcessingTest-red", num2str(red), ".mat"), "to_save_peaq_real", "to_save_pemoq_real", "SNR_real", "to_save_peaq_pghi", "to_save_pemoq_pghi", "SNR_pghi", "to_save_peaq_fgla", "to_save_pemoq_fgla", "SNR_fgla", "to_save_peaq_spsi", "to_save_pemoq_spsi", "SNR_spsi", "M", "L")
 end
 toc
 
