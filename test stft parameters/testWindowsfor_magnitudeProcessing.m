@@ -1,9 +1,7 @@
-clear all
 
 addpath('utils', genpath('ltfat'), genpath('phaseret'), 'test stft parameters', genpath('PEASS-Software-v2.0.1'), genpath('PEAQ'))
 
-%ltfatstart(); % start the ltfat toolbox
-phaseretstart;
+%ltfatstart(); % start the ltfat toolboxphaseretstart;
 
 %%
 % base_folder = '\\kfsnas08\Denklast\amarafioti\Documents\Datasets\Lakh\new-simple-piano\';
@@ -14,7 +12,7 @@ base_folder = 'LJSpeech-1.1/wavs/';
 soundfiles = dir(base_folder);
 soundfiles = soundfiles(3:end);
 
-
+git ad
 %% STFT parameters 
 
 L = 2^13 * 3 * 5;
