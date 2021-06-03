@@ -12,12 +12,12 @@ for i=1:size(means,3)
     plot(10:100/size(means, 2):100, means(1, :, i),'LineWidth',4, 'Color', colors(i, :))
 end
 
-xlabel('iterations','FontSize',24)
-ylabel(ylabelstr,'FontSize',24)
+xlabel('iterations','FontSize',32)
+ylabel(ylabelstr,'FontSize',32)
 set(gca, 'XTick', [1e1, 5e1, 1e2, 1e3])
 legend({'D = 32','D = 16', 'D = 8', 'D = 4', 'D = 2'},'Location','southeast','FontSize',24)
-set(gca,'Fontsize',24);
+set(gca,'Fontsize',32);
 
 ylim(ylimrange)
-
+box on
 end

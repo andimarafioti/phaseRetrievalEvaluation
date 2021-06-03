@@ -14,11 +14,11 @@ end
 
 xlabel('Time (secs)','FontSize',24)
 ylabel(ylabelstr,'FontSize',24)
-% set(gca, 'XTick', [1, 1e1, 2e1])
+set(gca, 'YTick', [-3, -2, -1, 0])
 xlim([0, 50])
 % legend({'D = 32','D = 16', 'D = 8', 'D = 4', 'D = 2'},'Location','southeast','FontSize',24)
 set(gca,'Fontsize',24);
 
 ylim(ylimrange)
-
+box on
 end
