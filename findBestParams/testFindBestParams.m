@@ -1,9 +1,9 @@
 clear all
 
-% ltfatstart(); % start the ltfat toolbox
-% phaseretstart;
+ltfatstart(); % start the ltfat toolbox
+phaseretstart;
 
-base_folder = '\\kfsnas08.kfs.oeaw.ac.at\Denklast\amarafioti\Documents\Datasets\LJSpeech-1.1\wavs\';
+base_folder = 'LJSpeech-1.1/wavs/';
 soundfiles = dir(base_folder);
 soundfiles = soundfiles(3:end);
 examples = 64;
