@@ -1,4 +1,4 @@
-function plotDiffData(index, means, M, tfrs, ylabelstr, ylimrange, faceColor)
+function plotDiffData(index, means, M, tfrs, ylabelstr, titles, ylimrange, faceColor, saveas)
 sr = 22050;
 
 f = figure(index);
@@ -9,27 +9,35 @@ set(gca, 'XScale', 'log');
 
 Y = [max(means)' min(means)'-max(means)'];
 X = [tfrs tfrs];
-h = area(X, Y, 'LineStyle',':', 'handleVisibility', 'off');
-h(1).FaceAlpha = 0;
-h(1).EdgeAlpha = 0;
-h(2).FaceColor = faceColor;
-h(2).FaceAlpha = 0.7;
+% h = area(X, Y, 'LineStyle',':', 'handleVisibility', 'off');
+% h(1).FaceAlpha = 0;
+% h(1).EdgeAlpha = 0;
+% h(2).FaceColor = faceColor;
+% h(2).FaceAlpha = 0.7;
 
 line_styles = {'-'; '--'; ':'; '-.'};
+
+plot(NaN,NaN,line_styles{1},'Color', faceColor,'LineWidth',3);
+plot(NaN,NaN,line_styles{2},'Color', faceColor,'LineWidth',3);
+plot(NaN,NaN,line_styles{3},'Color', faceColor,'LineWidth',3);
+
 for i=1:size(means,1)
-    semilogx(tfrs(:), means(i, :), 'LineWidth',4, 'LineStyle', line_styles{i}, 'Color', 'k')
+    semilogx(tfrs(:), means(i, :), 'LineWidth',9, 'LineStyle', line_styles{i}, 'Color', faceColor)
 end
 
 xlim([1e-3, 2e4])
 set(gca, 'XTick', [1e-3,1e-1,1e1,1e3])
 
 ylim(ylimrange)
-xlabel('\lambda','FontSize',24)
-ylabel(ylabelstr,'FontSize',24)
-legend({'midi','speech', 'electronic'},'Location','southeast','FontSize',24)
-set(gca,'Fontsize',24);
+xlabel('\lambda','FontSize',48)
+ylabel(ylabelstr,'FontSize',48)
+title(titles,'FontSize',48)
+
+%legend({'MIDI','Speech', 'Music'},'Location','northwest','FontSize',48)
+set(gca,'Fontsize',48);
 
 % hold off
 
 box on
+exportgraphics(f, strcat("data_dependencies_", saveas, ".png"))
 end
