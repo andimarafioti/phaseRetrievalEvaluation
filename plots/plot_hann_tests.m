@@ -49,7 +49,7 @@ xlim([1e-3, 2e4])
 set(gca, 'XTick', [1e-3,1e-1,1e1,1e3])
 
 ylim([-4, 0.5])
-xlabel('\lambda','FontSize',48)
+% xlabel('\lambda','FontSize',48)
 ylabel("ODG",'FontSize',48)
 title("PGHI",'FontSize',48)
 
@@ -104,9 +104,10 @@ end
 
 xlim([1e-3, 2e4])
 set(gca, 'XTick', [1e-3,1e-1,1e1,1e3])
+set(gca, 'YTick', [])
 
 ylim([-4, 0.5])
-xlabel('\lambda','FontSize',48)
+% xlabel('\lambda','FontSize',48)
 %ylabel("ODG",'FontSize',48)
 title("FGLA",'FontSize',48)
 
@@ -168,9 +169,10 @@ end
 
 xlim([1e-3, 2e4])
 set(gca, 'XTick', [1e-3,1e-1,1e1,1e3])
+set(gca, 'YTick', [])
 
 ylim([-4, 0.5])
-xlabel('\lambda','FontSize',48)
+% xlabel('\lambda','FontSize',48)
 %ylabel("ODG",'FontSize',48)
 title("SPSI",'FontSize',48)
 
@@ -284,7 +286,7 @@ end
 
 xlim([1e-3, 2e4])
 set(gca, 'XTick', [1e-3,1e-1,1e1,1e3])
-
+set(gca, 'YTick', [])
 ylim([0, 60])
 xlabel('\lambda','FontSize',48)
 %ylabel("SNR_{MS}",'FontSize',48)
@@ -348,7 +350,7 @@ end
 
 xlim([1e-3, 2e4])
 set(gca, 'XTick', [1e-3,1e-1,1e1,1e3])
-
+set(gca, 'YTick', [])
 ylim([0, 60])
 xlabel('\lambda','FontSize',48)
 %ylabel("ODG",'FontSize',48)
