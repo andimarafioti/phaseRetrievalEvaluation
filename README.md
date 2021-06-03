@@ -10,6 +10,8 @@ git submodule init
 git submodule update
 ```
 
+Some files assume that you have [LJSpeech dataset](https://keithito.com/LJ-Speech-Dataset/). Please extract it in the main folder.
+
 ## Usage
 
 In order to use our implementation to find the best set of STFT parameters for a phase retrieval algorithm, we provide two scripts inside of the  'findBestParams' folder: 'findBestParams.m' and 'testFindBestParams.m'. The first one, contains the function that analyses a phase retrieval algorithm over a set of STFT parameters and returns the set of parameters that perform best. To clear any doubts as to how this function should be used, we also provide the script 'testFindBestParams.m' as an example.
