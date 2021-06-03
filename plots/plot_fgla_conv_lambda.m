@@ -17,19 +17,21 @@ set(f, 'Position', [10 10 600 900])
 lineStyles = { ':', '--', '-.', '-'};
 
 set(gca, 'XScale', 'log');
-set(gca,'Fontsize',32);
+set(gca,'Fontsize',48);
 xlim([1e-3, 2e4])
 set(gca, 'XTick', [1e-3,1e-1,1e1,1e3])
-xlabel('\lambda','FontSize',32)
+set(gca, 'YTick', [0,20,40,60])
+
+xlabel('\lambda','FontSize',48)
 ylim(ylimrange)
 box on
 hold on
 for i=1:size(means,2)
     semilogx(tfrs, means(:, i), lineStyles{i}, 'LineWidth',5, 'Color', [0.9290, 0.6940, 0.1250])
 end
-ylabel(ylabelstr,'FontSize',32)
+ylabel(ylabelstr,'FontSize',48)
 
 if leg
-    legend({'iter = 5','iter = 30', 'iter = 100', 'iter = 300'},'Location','northeast','FontSize',24)
+    legend({'5','30', '100', '300'},'Location','northeast','FontSize',32)
 end
 end
