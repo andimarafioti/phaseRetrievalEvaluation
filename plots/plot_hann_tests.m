@@ -179,7 +179,7 @@ title("SPSI",'FontSize',48)
 set(gca,'Fontsize',48);
 
 % hold off
-legend({'gauss','Blackman', 'Hann', 'Bartlett'},'Location','northeast','FontSize',48)
+legend({'Gauss','Blackman', 'Hann', 'Bartlett'},'Location','northeast','FontSize',64)
 
 box on
 exportgraphics(f3, "windows_ODG_SPSI.png")
@@ -359,7 +359,7 @@ title("SPSI",'FontSize',48)
 set(gca,'Fontsize',48);
 
 % hold off
-legend({'gauss','Blackman', 'Hann', 'Bartlett'},'Location','northeast','FontSize',48)
+legend({'Gauss','Blackman', 'Hann', 'Bartlett'},'Location','northeast','FontSize',64)
 
 box on
 exportgraphics(f6, "windows_SNR_SPSI.png")
