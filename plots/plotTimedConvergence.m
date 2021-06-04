@@ -12,12 +12,13 @@ for i=1:size(means,3)
     plot(times(i)*(1:size(means(1, :, i), 2))/size(means(1, :, i), 2), means(1, :, i),'LineWidth',4, 'Color', colors(i, :))
 end
 
-xlabel('Time (secs)','FontSize',24)
-ylabel(ylabelstr,'FontSize',24)
-set(gca, 'YTick', [-3, -2, -1, 0])
+xlabel('Time (secs)','FontSize',32)
+ylabel(ylabelstr,'FontSize',32)
+% set(gca, 'YTick', [-3, -2, -1, 0])
+set(gca, 'YTick', [0, 10, 20, 30, 40])
 xlim([0, 50])
-% legend({'D = 32','D = 16', 'D = 8', 'D = 4', 'D = 2'},'Location','southeast','FontSize',24)
-set(gca,'Fontsize',24);
+legend({'D = 32','D = 16', 'D = 8', 'D = 4', 'D = 2'},'Location','southeast','FontSize',24)
+set(gca,'Fontsize',32);
 
 ylim(ylimrange)
 box on
