@@ -64,5 +64,5 @@ end
 
 for index = 1:3
     index = 4-index;
-    plotSNRmsTest(4, squeeze(means_SNR(index, :, :, :, :)), tfrs, 'SNR_{MS} (dB)', [0, 60], Markers{index})
+    plotSNRmsTest(4, squeeze(means_SNR(index, :, :, :, :)), tfrs, 'SNR_{MS}', [0, 60], Markers{index})
 end
