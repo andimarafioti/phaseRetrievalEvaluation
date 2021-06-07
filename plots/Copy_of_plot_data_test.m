@@ -18,23 +18,6 @@ means_SC_SPSI = [mean(SC_midi_SPSI, 1); mean(SC_speech_SPSI, 1); mean(SC_electro
 means_ODG_PGHI = [mean(ODG_midi_PGHI, 1); mean(ODG_speech_PGHI, 1); mean(ODG_electronic_PGHI, 1); mean(ODG_rock_PGHI, 1)];
 means_ODG_SPSI = [mean(ODG_midi_SPSI, 1); mean(ODG_speech_SPSI, 1); mean(ODG_electronic_SPSI, 1); mean(ODG_rock_SPSI, 1)];
 
-
-for index = 1:length(red)
-    plotDiffData(1, -means_SC_PGHI(1:3, :, index), M, tfrs(:, index), 'SNR_{MS}', ' ', [0, 60], colors(2*index-1, :), 'SNR_{MS} PGHI')
-end
-
-for index = 2
-    plotDiffData(2, -means_SC_SPSI(1:3, :, index), M, tfrs(:, index), ' ', ' ', [0, 60], colors(2*index-1, :), 'SNR_{MS} SPSI')
-end
-
-for index = 1:length(red)
-    plotDiffData(3, means_ODG_PGHI(1:3, :, index), M, tfrs(:, index), 'ODG', 'PGHI', [-4, 0.5], colors(2*index-1, :), 'ODG PGHI')
-end
-
-for index = 2
-    plotDiffData(4, means_ODG_SPSI(1:3, :, index), M, tfrs(:, index), ' ', 'SPSI', [-4, 0.5], colors(2*index-1, :), 'ODG SPSI')
-end
-
 load('fgla_diff_data.mat')
 
 tfrs = (M.^2./(sr.*red)')';
@@ -46,13 +29,38 @@ ODG_midi_FGLA(any(isnan(ODG_midi_FGLA), [2,3]), :, :) = [];
 means_SC_FGLA = [mean(SC_midi_FGLA, 1); mean(SC_speech_FGLA, 1); mean(SC_electronic_FGLA, 1)];
 means_ODG_FGLA = [mean(ODG_midi_FGLA, 1); mean(ODG_speech_FGLA, 1); mean(ODG_electronic_FGLA, 1)];
 
+f = figure(1);
+set(f, 'Position', [10 10 1800 800])
+
 for index = 1:length(red)
-    plotDiffData(5, -means_SC_FGLA(:, 1:end-1, index), M, tfrs(1:end-1, index), ' ', ' ', [0, 60], colors(2*(index+1)-1, :), 'SNR_{MS} FGLA')
+    plotDiffData(1, -means_SC_PGHI(1:3, :, index), M, tfrs(:, index), 'SNR_{MS}', ' ', [0, 59], colors(2*index-1, :), 'SNR_{MS} PGHI')
+end
+
+for index = 2
+    plotDiffData(3, -means_SC_SPSI(1:3, :, index), M, tfrs(:, index), ' ', ' ', [0, 59], colors(2*index-1, :), 'SNR_{MS} SPSI')
 end
 
 for index = 1:length(red)
-    plotDiffData(6, means_ODG_FGLA(:, 1:end-1, index), M, tfrs(1:end-1, index), ' ', 'FGLA', [-4, 0.5], colors(2*(index+1)-1, :), 'ODG FGLA')
+    plotDiffData(2, -means_SC_FGLA(:, 1:end-1, index), M, tfrs(1:end-1, index), ' ', ' ', [0, 59], colors(2*(index+1)-1, :), 'SNR_{MS} FGLA')
 end
 
-% plotStats(1, means_SC_midi, M, tfrs, 'Objective quality of phaseless reconstruction', 'SC PGHI', [-60,6])
-% plotStats(2, means_SC_speech, M, tfrs, 'Objective quality of phaseless reconstruction', 'SC PGHI', [-60,6])
+exportgraphics(f, strcat("data_dependencies_SNR.png"))
+
+
+f = figure(2);
+set(f, 'Position', [10 10 1800 760])
+
+for index = 1:length(red)
+    plotDiffData(1, means_ODG_PGHI(1:3, :, index), M, tfrs(:, index), 'ODG_{1}', 'PGHI', [-4, 0.5], colors(2*index-1, :), 'ODG PGHI')
+end
+
+for index = 2
+    plotDiffData(3, means_ODG_SPSI(1:3, :, index), M, tfrs(:, index), ' ', 'SPSI', [-4, 0.5], colors(2*index-1, :), 'ODG SPSI')
+end
+
+for index = 1:length(red)
+    plotDiffData(2, means_ODG_FGLA(:, 1:end-1, index), M, tfrs(1:end-1, index), ' ', 'FGLA', [-4, 0.5], colors(2*(index+1)-1, :), 'ODG FGLA')
+end
+
+exportgraphics(f, strcat("data_dependencies_ODG.png"))
+
