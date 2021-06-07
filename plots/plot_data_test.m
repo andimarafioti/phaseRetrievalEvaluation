@@ -48,7 +48,7 @@ exportgraphics(f, strcat("data_dependencies_SNR.png"))
 
 
 f = figure(2);
-set(f, 'Position', [10 10 1800 760])
+set(f, 'Position', [10 10 1800 680])
 
 for index = 1:length(red)
     plotDiffData(1, means_ODG_PGHI(1:3, :, index), M, tfrs(:, index), 'ODG_{1}', 'PGHI', [-4, 0.5], colors(2*index-1, :), 'ODG PGHI')
