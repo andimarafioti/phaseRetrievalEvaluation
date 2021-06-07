@@ -30,6 +30,7 @@ xlim([1e-3, 2e4])
 
 if contains(saveas, "SNR")
     set(gca, 'XTick', [1e-3, 1e-1,1e1,1e3])
+    xlabel('\lambda','FontSize',48)
 else
     set(gca, 'XTick', [])
 end
@@ -39,12 +40,11 @@ if index ~= 1
 end
 
 ylim(ylimrange)
-% xlabel('\lambda','FontSize',48)
 ylabel(ylabelstr,'FontSize',48)
 title(titles,'FontSize',48)
 
 if index == 3
-    leg = legend({'MIDI','Speech', 'Music'},'Location','northeast','FontSize',32);
+    leg = legend({'MIDI','Speech', 'Music'},'Location','northeast','FontSize',48);
     leg.ItemTokenSize = [80,160];
 end
 
