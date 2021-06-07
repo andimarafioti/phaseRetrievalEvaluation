@@ -4,7 +4,8 @@ line_styles = { '-','-.','--',':'};
 sr = 22050;
 
 f1 = figure(1);
-set(f1, 'Position', [0 0 750 1000])
+set(f1, 'Position', [10 10 1800 760])
+ha = subplot(1, 3, 1);
 
 hold on
 set(gca, 'XScale', 'log');
@@ -46,10 +47,11 @@ end
 
 
 xlim([1e-3, 2e4])
-set(gca, 'XTick', [1e-3,1e-1,1e1,1e3])
+set(gca, 'XTick', [])
 
 ylim([-4, 0.5])
 % xlabel('\lambda','FontSize',48)
+ylabel("ODG_{1}",'FontSize',48)
 ylabel("ODG",'FontSize',48)
 title("PGHI",'FontSize',48)
 
@@ -57,11 +59,8 @@ set(gca,'Fontsize',48);
 
 % hold off
 box on
-exportgraphics(f1, "windows_ODG_PGHI.png")
-
 %%
-f2 = figure(2);
-set(f2, 'Position', [0 0 750 1000])
+ha = subplot(1, 3, 2);
 
 hold on
 set(gca, 'XScale', 'log');
@@ -103,7 +102,7 @@ end
 
 
 xlim([1e-3, 2e4])
-set(gca, 'XTick', [1e-3,1e-1,1e1,1e3])
+set(gca, 'XTick', [])
 set(gca, 'YTick', [])
 
 ylim([-4, 0.5])
@@ -116,20 +115,18 @@ set(gca,'Fontsize',48);
 % hold off
 
 box on
-exportgraphics(f2, "windows_ODG_FGLA.png")
 
 %%
-f3 = figure(3);
-set(f3, 'Position', [0 0 750 1000])
+ha = subplot(1, 3, 3);
 
 hold on
 set(gca, 'XScale', 'log');
 
 
-plot(NaN,NaN,line_styles{1},'LineWidth',10, 'Color', colors(3, :),'LineWidth',4);
-plot(NaN,NaN,line_styles{2},'LineWidth',10, 'Color', colors(3, :),'LineWidth',4);
-plot(NaN,NaN,line_styles{3},'LineWidth',10, 'Color', colors(3, :),'LineWidth',4);
-plot(NaN,NaN,line_styles{4},'LineWidth',10, 'Color', colors(3, :),'LineWidth',4);
+plot(NaN,NaN,line_styles{1},'LineWidth',10, 'Color', colors(3, :),'LineWidth',6);
+plot(NaN,NaN,line_styles{2},'LineWidth',10, 'Color', colors(3, :),'LineWidth',6);
+plot(NaN,NaN,line_styles{3},'LineWidth',10, 'Color', colors(3, :),'LineWidth',6);
+plot(NaN,NaN,line_styles{4},'LineWidth',10, 'Color', colors(3, :),'LineWidth',6);
 
 load('new_pghi_gla_ljspeech.mat')
 load('new_spsi_ljspeech.mat')
@@ -168,7 +165,7 @@ end
 
 
 xlim([1e-3, 2e4])
-set(gca, 'XTick', [1e-3,1e-1,1e1,1e3])
+set(gca, 'XTick', [])
 set(gca, 'YTick', [])
 
 ylim([-4, 0.5])
@@ -179,15 +176,19 @@ title("SPSI",'FontSize',48)
 set(gca,'Fontsize',48);
 
 % hold off
-legend({'Gauss','Blackman', 'Hann', 'Bartlett'},'Location','northeast','FontSize',64)
+leg = legend({'Gauss','Blackman', 'Hann', 'Bartlett'},'Location','northeast','FontSize',48);
+leg.ItemTokenSize = [80,160];
 
 box on
-exportgraphics(f3, "windows_ODG_SPSI.png")
+exportgraphics(f1, "windows_ODG.png")
 
 %%
 
+
 f4 = figure(4);
-set(f4, 'Position', [0 0 750 1000])
+set(f4, 'Position', [10 10 1800 800])
+
+ha = subplot(1, 3, 1);
 
 hold on
 set(gca, 'XScale', 'log');
@@ -234,16 +235,13 @@ set(gca, 'XTick', [1e-3,1e-1,1e1,1e3])
 ylim([0, 60])
 xlabel('\lambda','FontSize',48)
 ylabel("SNR_{MS}",'FontSize',48)
-title("PGHI",'FontSize',48)
 
 set(gca,'Fontsize',48);
 
 % hold off
 box on
-exportgraphics(f4, "windows_SNR_PGHI.png")
 %%
-f5 = figure(5);
-set(f5, 'Position', [0 0 750 1000])
+ha = subplot(1, 3, 2);
 
 hold on
 set(gca, 'XScale', 'log');
@@ -290,27 +288,24 @@ set(gca, 'YTick', [])
 ylim([0, 60])
 xlabel('\lambda','FontSize',48)
 %ylabel("SNR_{MS}",'FontSize',48)
-title("FGLA",'FontSize',48)
 
 set(gca,'Fontsize',48);
 
 % hold off
 
 box on
-exportgraphics(f5, "windows_SNR_FGLA.png")
 
 %%
-f6 = figure(6);
-set(f6, 'Position', [0 0 750 1000])
+ha = subplot(1, 3, 3);
 
 hold on
 set(gca, 'XScale', 'log');
 
 
-plot(NaN,NaN,line_styles{1},'LineWidth',10, 'Color', colors(3, :),'LineWidth',4);
-plot(NaN,NaN,line_styles{2},'LineWidth',10, 'Color', colors(3, :),'LineWidth',4);
-plot(NaN,NaN,line_styles{3},'LineWidth',10, 'Color', colors(3, :),'LineWidth',4);
-plot(NaN,NaN,line_styles{4},'LineWidth',10, 'Color', colors(3, :),'LineWidth',4);
+plot(NaN,NaN,line_styles{1},'LineWidth',10, 'Color', colors(3, :),'LineWidth',6);
+plot(NaN,NaN,line_styles{2},'LineWidth',10, 'Color', colors(3, :),'LineWidth',6);
+plot(NaN,NaN,line_styles{3},'LineWidth',10, 'Color', colors(3, :),'LineWidth',6);
+plot(NaN,NaN,line_styles{4},'LineWidth',10, 'Color', colors(3, :),'LineWidth',6);
 
 load('new_pghi_gla_ljspeech.mat')
 load('new_spsi_ljspeech.mat')
@@ -354,12 +349,12 @@ set(gca, 'YTick', [])
 ylim([0, 60])
 xlabel('\lambda','FontSize',48)
 %ylabel("ODG",'FontSize',48)
-title("SPSI",'FontSize',48)
 
 set(gca,'Fontsize',48);
 
 % hold off
-legend({'Gauss','Blackman', 'Hann', 'Bartlett'},'Location','northeast','FontSize',64)
+leg = legend({'Gauss','Blackman', 'Hann', 'Bartlett'},'Location','northeast','FontSize',48);
+leg.ItemTokenSize = [80,160];
 
 box on
-exportgraphics(f6, "windows_SNR_SPSI.png")
+exportgraphics(f4, "windows_SNR.png")
