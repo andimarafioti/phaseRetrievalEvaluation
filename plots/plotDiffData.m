@@ -1,8 +1,9 @@
 function plotDiffData(index, means, M, tfrs, ylabelstr, titles, ylimrange, faceColor, saveas)
 sr = 22050;
 
-f = figure(index);
-set(f, 'Position', [0 0 600 800])
+% f = figure(index);
+% set(f, 'Position', [0 0 600 680])
+ha = subplot(1, 3, index);
 
 hold on
 set(gca, 'XScale', 'log');
@@ -26,21 +27,31 @@ for i=1:size(means,1)
 end
 
 xlim([1e-3, 2e4])
-set(gca, 'XTick', [1e-3, 1e-1,1e1,1e3])
-% set(gca, 'YTick', [])
+
+if contains(saveas, "SNR")
+    set(gca, 'XTick', [1e-3, 1e-1,1e1,1e3])
+else
+    set(gca, 'XTick', [])
+end
+
+if index ~= 1
+    set(gca, 'YTick', [])
+end
 
 ylim(ylimrange)
-xlabel('\lambda','FontSize',48)
+% xlabel('\lambda','FontSize',48)
 ylabel(ylabelstr,'FontSize',48)
 title(titles,'FontSize',48)
 
-% leg = legend({'MIDI','Speech', 'Music'},'Location','northeast','FontSize',32);
-% leg.ItemTokenSize = [80,160];
+if index == 3
+    leg = legend({'MIDI','Speech', 'Music'},'Location','northeast','FontSize',32);
+    leg.ItemTokenSize = [80,160];
+end
 
 set(gca,'Fontsize',48);
 
 % hold off
 
 box on
-exportgraphics(f, strcat("data_dependencies_", saveas, ".png"))
+% exportgraphics(f, strcat("data_dependencies_", saveas, ".png"))
 end
