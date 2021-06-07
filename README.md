@@ -20,7 +20,7 @@ In order to use our implementation to find the best set of STFT parameters for a
 ## Resources
 
 - On the main folder you will find all of the results from our experiments presented in the paper. These can be recreated with the scripts inside of the 'test stft parameters' folder.
-- The paper will be available after going through peer-review.
+- The paper explaining the experiments will be available after going through peer-review.
 
 
 ### Acknowledgments
