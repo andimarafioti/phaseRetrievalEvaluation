@@ -4,7 +4,7 @@ line_styles = { '-','-.','--',':'};
 sr = 22050;
 
 f1 = figure(1);
-set(f1, 'Position', [10 10 1800 760])
+set(f1, 'Position', [10 10 1800 680])
 ha = subplot(1, 3, 1);
 
 hold on
@@ -52,7 +52,6 @@ set(gca, 'XTick', [])
 ylim([-4, 0.5])
 % xlabel('\lambda','FontSize',48)
 ylabel("ODG_{1}",'FontSize',48)
-ylabel("ODG",'FontSize',48)
 title("PGHI",'FontSize',48)
 
 set(gca,'Fontsize',48);
@@ -232,7 +231,7 @@ end
 xlim([1e-3, 2e4])
 set(gca, 'XTick', [1e-3,1e-1,1e1,1e3])
 
-ylim([0, 60])
+ylim([0, 59])
 xlabel('\lambda','FontSize',48)
 ylabel("SNR_{MS}",'FontSize',48)
 
@@ -285,7 +284,7 @@ end
 xlim([1e-3, 2e4])
 set(gca, 'XTick', [1e-3,1e-1,1e1,1e3])
 set(gca, 'YTick', [])
-ylim([0, 60])
+ylim([0, 59])
 xlabel('\lambda','FontSize',48)
 %ylabel("SNR_{MS}",'FontSize',48)
 
@@ -346,7 +345,7 @@ end
 xlim([1e-3, 2e4])
 set(gca, 'XTick', [1e-3,1e-1,1e1,1e3])
 set(gca, 'YTick', [])
-ylim([0, 60])
+ylim([0, 59])
 xlabel('\lambda','FontSize',48)
 %ylabel("ODG",'FontSize',48)
 
