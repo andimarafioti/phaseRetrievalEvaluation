@@ -25,5 +25,5 @@ In order to use our implementation to find the best set of STFT parameters for a
 
 ### Acknowledgments
 
-This project accompanies the research work on phase retrieval done at the Acoustics Research Institute in Vienna. The paper was submitted to an IEEE journal and is under review.
+This project accompanies the research work on phase retrieval done at the Acoustics Research Institute in Vienna. The paper was submitted to the IEEE Transactions on Signal Processing and is being prepared for publishing.
 
